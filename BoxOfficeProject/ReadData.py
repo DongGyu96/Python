@@ -1,7 +1,11 @@
+#-*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
 import urllib.request as req
 import urllib.parse
 from openpyxl import load_workbook
+import http.client
+import geocoder
+import socket
 
 DAILY = (0,)
 WEEKLY = (1,)
@@ -43,7 +47,7 @@ def LoadXMLFromFileBoxOffice(type, date):
 def LoadXMLFromFileMovieInfo(code):
     # 영화 코드로 조회하는 영화 상세정보 movieCd값
     Data = None
-    savename = "MoveInfo.xml"
+    savename = "MovieInfo.xml"
     url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.xml"
     key = "e4ef9cc26c8da2fbd710c5899e835cd7"
     url = url + "?key=" + key +"&movieCd=" + str(code)
@@ -55,13 +59,17 @@ def LoadXMLFromFileMovieInfo(code):
     Data = BeautifulSoup(xml, "html.parser")
     return Data
 
-def LoadXMLFromFileMovieList(page):
+def LoadXMLFromFileMovieList(page, name):
     # 영화 목록
     Data = None
-    savename = "MoveList.xml"
+    savename = "MovieList.xml"
     url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.xml"
     key = "70fb64767aa3cd31fb488fe55820bf17"
     url = url + "?key=" + key + "&curPage=" + str(page) + "&itemPerPage=50"
+    if name != None:
+        name = urllib.parse.quote(name)
+        url = url + "&movieNm=" + name
+        #url = url.encode('utf-8')
     data = urllib.request.urlopen(url).read()
     req.urlretrieve(url, savename)
 
@@ -75,11 +83,31 @@ def LoadXLSFromFileTheater():
     Data = Data.worksheets[0]
     return Data
 
+def NaverAPI():
+    server = 'openapi.naver.com'
+    client_id = 'CauJEcypbFDul3iDdw3V'
+    client_secret = '1gsH15h8bj'
+    conn = http.client.HTTPSConnection(server)
+    conn.request('GET', '/v1/serch/book.xml?query=love&display=10&start=1',None,
+                 {'X-Naver-Clinet-Id':client_id, 'X-Naver-Client-Secret':client_secret})
+    req = conn.getresponse()
+    cLen = req.getheader("Content-Length")
+    req.read(int(cLen))
+
 # tkinter 버튼 함수
 # command로 인자받는법 : 람다함수 사용
 # command = lambda index = i: func(index)
 
 if __name__ == '__main__':
-    pass
+    myloc = geocoder.ip(socket.gethostbyname(socket.gethostname()))
+    print(socket.gethostbyname(socket.gethostname()))
+    print(myloc.latlng)
+    print(myloc.city)
+    print(myloc.ip)
+
+    myloc = geocoder.ip('me')
+    print(myloc.latlng)
+    print(myloc.city)
+    print(myloc.ip)
 else:
     pass

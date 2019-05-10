@@ -4,6 +4,7 @@ from ReadData import *
 
 class MovieList():
     def __init__(self, window, width, height):
+        self.moviename = None
         self.movielistpage = 1
         self.width = width
         self.height = height
@@ -17,22 +18,36 @@ class MovieList():
         self.movielistbox = Listbox(self.framemovielist, width=46, height=22, bd=6, relief="ridge",
                                     yscrollcommand=self.movielistscrollbar.set)
         self.movielistscrollbar["command"] = self.movielistbox.yview
-        self.movieinfocanvas = Canvas(self.framesearch2, width=self.width / 2, height=500, bd=4, relief="ridge",
+        self.movieinfocanvas = Canvas(self.framesearch2, width=self.width / 2 - 10, height=500, bd=4, relief="ridge",
                                       background="light yellow")
 
         self.SearchFrameLabel = Label(self.framesearch1, font=("Impact", 25, "bold"), text="영화 상세 정보")
 
         self.searchmovie = Entry(self.framesearch1, font=("HYHeadLine", 15, "bold"), width=31, bd=6, relief="ridge")
-        self.searchmoviebutton = Button(self.SearchFrame, font=("HYHeadLine", 14, "bold"), text="검색", width=6, bd=3)
+        self.searchmoviebutton = Button(self.SearchFrame, font=("HYHeadLine", 14, "bold"), text="검색", width=6,
+                                        bd=3, command = self.Search)
         self.nextmoviebutton = Button(self.SearchFrame, font=("HYHeadLine", 10, "bold"), text="다음 페이지", bd=3,
-                                      command=self.NextMovie)
+                                      width=9, command=self.NextMovie)
         self.prevmoviebutton = Button(self.SearchFrame, font=("HYHeadLine", 10, "bold"), text="이전 페이지", bd=3,
-                                      command=self.PrevMovie)
-        self.MovieListData = LoadXMLFromFileMovieList(self.movielistpage)
+                                      width=9, command=self.PrevMovie)
+        self.infobutton = Button(self.SearchFrame, font = ("HYHeadLine", 10, "bold"), text = "상세 정보", bd = 3,
+                                 width = 9, command = self.Info)
+        self.MovieListData = LoadXMLFromFileMovieList(self.movielistpage, self.moviename)
         i = 0
         for data in self.MovieListData.find_all("movie"):
             self.movielistbox.insert(i, data.movienm.string)
             i += 1
+
+    def Search(self):
+        self.moviename = self.searchmovie.get()
+        print(self.moviename)
+        self.ResetMovieList()
+
+    def Info(self):
+        try:
+            self.searchname = self.movielistbox.get(self.movielistbox.curselection(),self.movielistbox.curselection())
+        except:
+            self.searchname = None
 
     def NextMovie(self):
         self.movielistpage += 1
@@ -43,7 +58,7 @@ class MovieList():
         self.ResetMovieList()
 
     def ResetMovieList(self):
-        self.MovieListData = LoadXMLFromFileMovieList(self.movielistpage)
+        self.MovieListData = LoadXMLFromFileMovieList(self.movielistpage, self.moviename)
 
         self.movielistbox.delete(0, 49)
         i = 0
@@ -63,6 +78,7 @@ class MovieList():
         self.searchmoviebutton.place(x=355, y=60)
         self.nextmoviebutton.place(x=355, y=110)
         self.prevmoviebutton.place(x=355, y=140)
+        self.infobutton.place(x=355, y= 170)
 
     def GetFrame(self):
         return self.SearchFrame
