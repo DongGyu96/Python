@@ -22,6 +22,9 @@ class Interface:
         self.MovieList = MovieList(window, width, height)
         self.notebook.add(self.MovieList.GetFrame(), image=self.SearchIcon)
 
+        self.ActorFrame = Frame(window, bd = 2, relief = "solid")
+        self.notebook.add(self.ActorFrame, image = self.ActorSearchIcon)
+
 
         self.MapFrame = Frame(window, bd = 2, relief = "solid")
         self.notebook.add(self.MapFrame, image = self.MapIcon)
@@ -30,12 +33,12 @@ class Interface:
 
 
     def SetPhotoImage(self):
-        self.RankingIcon = PhotoImage(file="Ranking.png")
-        self.MapIcon = PhotoImage(file = "Map.png")
-        self.SearchIcon = PhotoImage(file = "Search.png")
-        self.SettingIcon = PhotoImage(file = "Setting.png")
-        self.titleimage = PhotoImage(file = "boxoffice1.png")
-        self.boxofficeimage = PhotoImage(file = "123.png")
+        self.RankingIcon = PhotoImage(file="image/RankingIcon4.png")
+        self.MapIcon = PhotoImage(file = "image/MapIcon3.png")
+        self.SearchIcon = PhotoImage(file = "image/SearchIcon2.png")
+        self.SettingIcon = PhotoImage(file = "image/SettingIcon2.png")
+        self.ActorSearchIcon = PhotoImage(file = "image/ActorSearchIcon2.png")
+        self.titleimage = PhotoImage(file = "image/TitleImage.png")
 
 
     def Draw(self):

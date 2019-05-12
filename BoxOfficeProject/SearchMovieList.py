@@ -33,10 +33,21 @@ class MovieList():
         self.infobutton = Button(self.SearchFrame, font = ("HYHeadLine", 10, "bold"), text = "상세 정보", bd = 3,
                                  width = 9, command = self.Info)
         self.MovieListData = LoadXMLFromFileMovieList(self.movielistpage, self.moviename)
+
+        self.movielistsize = 0
+
         i = 0
+        find = False
         for data in self.MovieListData.find_all("movie"):
-            self.movielistbox.insert(i, data.movienm.string)
-            i += 1
+            for word in Filter:
+                if word in data.movienm.string:
+                    find = True
+                    break
+            if find == False:
+                self.movielistbox.insert(i, data.movienm.string)
+                i+= 1
+            find = False
+        self.movielistsize = i
 
     def Search(self):
         self.moviename = self.searchmovie.get()
@@ -60,11 +71,19 @@ class MovieList():
     def ResetMovieList(self):
         self.MovieListData = LoadXMLFromFileMovieList(self.movielistpage, self.moviename)
 
-        self.movielistbox.delete(0, 49)
+        self.movielistbox.delete(0, self.movielistsize)
         i = 0
+        find = False
         for data in self.MovieListData.find_all("movie"):
-            self.movielistbox.insert(i, data.movienm.string)
-            i += 1
+            for word in Filter:
+                if word in data.movienm.string:
+                    find = True
+                    break
+            if find == False:
+                self.movielistbox.insert(i, data.movienm.string)
+                i += 1
+            find = False
+        self.movielistsize = i
 
     def Render(self):
         self.framesearch2.pack(side=RIGHT, anchor="ne", fill="y", expand=True)

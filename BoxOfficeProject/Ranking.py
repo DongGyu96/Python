@@ -4,7 +4,7 @@ from ReadData import *
 
 class Ranking():
     def __init__(self, window, width, height):
-        self.boxofficeimage = PhotoImage(file="123.png")
+        self.boxofficeimage = PhotoImage(file="image/Ranking2.png")
         self.BoxofficeData = None
         self.boxofficetype = None
 
