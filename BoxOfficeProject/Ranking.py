@@ -17,7 +17,7 @@ class Ranking():
             self.rankframe.append(Frame(self.RankingFrame, width=266, height=316,
                                         bd=4, relief="ridge"))
             self.rankcanvas.append(Canvas(self.RankingFrame, width=250, height=300, bd=2, relief="solid"))
-            self.rankcanvas[i].create_rectangle(0, 0, 255, 305, fill="light yellow")
+            self.rankcanvas[i].create_rectangle(0, 0, 255, 305, fill="light blue")
         self.frametitle = Frame(self.RankingFrame, width=400, height=80)
         self.boxofficelabel = Label(self.frametitle, image=self.boxofficeimage)
 
@@ -48,7 +48,7 @@ class Ranking():
                                     command=lambda set=True: self.SetRanking(set))
         # command = lambda index = i: func(index)
         self.datelabel = Label(self.frameranking1, font=self.font, text=" ")
-        self.nextrankingbutton = Button(self.frameranking1, font=("consolas", 10, "bold"), text="다음 페이지",
+        self.nextrankingbutton = Button(self.frameranking1, font=("consolas ", 10, "bold"), text="다음 페이지",
                                         command=self.NextRanking)
         self.prevrankingbutton = Button(self.frameranking1, font=("consolas", 10, "bold"), text="이전 페이지",
                                         command=self.PrevRanking)
@@ -87,7 +87,7 @@ class Ranking():
                 if i + self.startrank > max:
                     self.startrank -= max
                 if i + self.startrank == int(data.rank.string):
-                    self.rankcanvas[i].create_rectangle(0, 0, 255, 305, fill="light yellow")
+                    self.rankcanvas[i].create_rectangle(0, 0, 255, 305, fill="light blue")
                     font = Font(size=42, family="Impact", weight="bold", slant="italic", underline=True)
                     rank = data.rank.string + "."
                     if data.rank.string == "1":

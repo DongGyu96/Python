@@ -6,7 +6,9 @@ def main():
 	window.title("Box Office")
 	window.geometry("940x600+400+200")
 	window.resizable(False, False)
-	
+
+	#Frame(window, bg="white").pack()
+
 	menu = Interface(window, 940, 600)
 	menu.Draw()
 

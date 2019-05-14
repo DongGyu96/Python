@@ -8,18 +8,18 @@ class MovieList():
         self.movielistpage = 1
         self.width = width
         self.height = height
-        self.SearchFrame = Frame(window, bd=2, relief="solid", background="light yellow")
+        self.SearchFrame = Frame(window, bd=2, relief="solid", background="light blue")
         self.framesearch1 = Frame(self.SearchFrame, width=self.width / 2, height=100, bd=0, relief="solid",
-                                  background="light yellow")
+                                  background="light blue")
         self.framesearch2 = Frame(self.SearchFrame, width=self.width / 2, height=self.height, bd=0, relief="solid",
-                                  background="light yellow")
+                                  background="light blue")
         self.framemovielist = Frame(self.SearchFrame, width=330, height=350, background="white")
         self.movielistscrollbar = Scrollbar(self.framemovielist)
         self.movielistbox = Listbox(self.framemovielist, width=46, height=22, bd=6, relief="ridge",
                                     yscrollcommand=self.movielistscrollbar.set)
         self.movielistscrollbar["command"] = self.movielistbox.yview
         self.movieinfocanvas = Canvas(self.framesearch2, width=self.width / 2 - 10, height=500, bd=4, relief="ridge",
-                                      background="light yellow")
+                                      background="light blue")
 
         self.SearchFrameLabel = Label(self.framesearch1, font=("Impact", 25, "bold"), text="영화 상세 정보")
 

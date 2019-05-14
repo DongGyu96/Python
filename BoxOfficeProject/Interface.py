@@ -1,6 +1,7 @@
 from tkinter import *
 from Ranking import *
 from SearchMovieList import *
+from SearchActorList import *
 from tkinter.font import *
 import tkinter.ttk
 
@@ -22,8 +23,9 @@ class Interface:
         self.MovieList = MovieList(window, width, height)
         self.notebook.add(self.MovieList.GetFrame(), image=self.SearchIcon)
 
-        self.ActorFrame = Frame(window, bd = 2, relief = "solid")
-        self.notebook.add(self.ActorFrame, image = self.ActorSearchIcon)
+        self.ActorList = ActorList(window, width, height)
+        #self.ActorFrame = Frame(window, bd = 2, relief = "solid")
+        self.notebook.add(self.ActorList.GetFrame(), image = self.ActorSearchIcon)
 
 
         self.MapFrame = Frame(window, bd = 2, relief = "solid")
@@ -46,3 +48,4 @@ class Interface:
         self.notebook.place(x = 10, y = 40)
         self.MovieList.Render()
         self.Ranking.Render()
+        self.ActorList.Render()
