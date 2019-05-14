@@ -11,6 +11,7 @@ def ToInt(list):
         for i in range(len(list)):
             num += int(list[i]) * (10 ** (size - i - 1))
     return num
+
 list = []
 for i in range(count):
     list.append(input(""))
@@ -24,46 +25,38 @@ for i in range(count):
         if list[i][j] == "+":
             middle = "+"
             for x in range(0, j - 1):
-                #first[x] = list[i][x]
                 first.append(list[i][x])
             for x in range(j + 2, len(list[i])):
                 if list[i][x] == " ":
                     break
                 else:
-                    #last[x - (j + 2)] = list[i][x]
                     last.append(list[i][x])
         elif list[i][j] == "-" and list[i][j + 1] == " ":
             middle = "-"
             for x in range(0, j - 1):
-                # first[x] = list[i][x]
                 first.append(list[i][x])
             for x in range(j + 2, len(list[i])):
                 if list[i][x] == " ":
                     break
                 else:
-                    # last[x - (j + 2)] = list[i][x]
                     last.append(list[i][x])
         elif list[i][j] == "*":
             middle = "*"
             for x in range(0, j - 1):
-                # first[x] = list[i][x]
                 first.append(list[i][x])
             for x in range(j + 2, len(list[i])):
                 if list[i][x] == " ":
                     break
                 else:
-                    # last[x - (j + 2)] = list[i][x]
                     last.append(list[i][x])
         elif list[i][j] == "/":
             middle = "/"
             for x in range(0, j - 1):
-                # first[x] = list[i][x]
                 first.append(list[i][x])
             for x in range(j + 2, len(list[i])):
                 if list[i][x] == " ":
                     break
                 else:
-                    # last[x - (j + 2)] = list[i][x]
                     last.append(list[i][x])
         elif list[i][j] == "=":
             for x in range(j+2, len(list[i])):

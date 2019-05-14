@@ -9,9 +9,8 @@ for k in range(number):
         num = num - h
     y = num
     if x < 10:
-        print(y, end="")
-        print("0", end="")
-        print(x)
+        result = str(y)  + "0"  + x
+        print(result)
     else:
-        print(y, end="")
-        print(x)
+        result = str(y)  + x
+        print(result)
