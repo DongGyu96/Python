@@ -24,7 +24,6 @@ class Interface:
         self.notebook.add(self.MovieList.GetFrame(), image=self.SearchIcon)
 
         self.ActorList = ActorList(window, width, height)
-        #self.ActorFrame = Frame(window, bd = 2, relief = "solid")
         self.notebook.add(self.ActorList.GetFrame(), image = self.ActorSearchIcon)
 
 
@@ -35,6 +34,7 @@ class Interface:
 
 
     def SetPhotoImage(self):
+        # label, button에도 사용 가능
         self.RankingIcon = PhotoImage(file="image/RankingIcon4.png")
         self.MapIcon = PhotoImage(file = "image/MapIcon3.png")
         self.SearchIcon = PhotoImage(file = "image/SearchIcon2.png")
