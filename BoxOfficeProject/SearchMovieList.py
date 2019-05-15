@@ -40,9 +40,11 @@ class MovieList():
         self.infobutton = Button(self.SearchFrame, font = ("HYHeadLine", 10, "bold"), text = "상세 정보", bd = 3,
                                  width = 9, command = self.Info)
 
+        #영화 목록 호출
         self.MovieListData = LoadXMLFromFileMovieList(self.movielistpage, self.moviename)
 
         self.movielistsize = 0
+        self.movieInfoData = None # 영화 상세 정보를 저장할 변수
 
         i = 0 # 리스트박스는 배열처럼 쓰기 때문에 일종의 인덱스 표현을 위해서
         find = False
@@ -71,8 +73,23 @@ class MovieList():
             # get(1, 1) 이면 리스트박스 2번째의 영화이름이 들어간 (영화이름,) 이 반환되서
             # self.searchname[0] 으로 뽑아내서 쓰면 됨
             self.searchname = self.movielistbox.get(self.movielistbox.curselection(),self.movielistbox.curselection())
+            for data in self.MovieListData.find_all("movie"):
+                if data.movienm.string == self.searchname[0]:
+                    self.movieInfoData = LoadXMLFromFileMovieInfo(data.moviecd.string)
+                    print(data.moviecd.string)
+                    self.RenderMovieInfo()
+                    break
         except:
             self.searchname = None
+
+    def RenderMovieInfo(self):
+        if self.movieInfoData != None:
+            print(self.movieInfoData.find("moviecd").string)
+            print(self.movieInfoData.find("movienm").string)
+            for data in self.movieInfoData.find_all("movieinfo"):
+                self.movieinfocanvas.create_text(10, 10, font=("HYHeadLine", 15, "bold"), text=data.movienm.string)
+                print(data.movienm.string)
+        #http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.xml?key=e4ef9cc26c8da2fbd710c5899e835cd7&movieCd=20191590
 
     def NextMovie(self):
         # 페이지를 증가시키고 리스트 박스 리셋
