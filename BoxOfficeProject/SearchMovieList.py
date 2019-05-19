@@ -2,12 +2,20 @@ from tkinter import *
 from tkinter.font import *
 from ReadData import *
 
+
+from io import BytesIO
+import urllib
+import urllib.request
+from PIL import Image,ImageTk
+
 class MovieList():
     def __init__(self, window, width, height):
         self.moviename = None
         self.movielistpage = 1  # 1부터 페이지를 넘길거기 때문
         self.width = width
         self.height = height
+
+        self.noImage = PhotoImage(file = 'image/NoImage.png')
 
         #bd = 두깨 크기
         #relief = 외곽선 설정
@@ -40,6 +48,10 @@ class MovieList():
         self.infobutton = Button(self.SearchFrame, font = ("HYHeadLine", 10, "bold"), text = "상세 정보", bd = 3,
                                  width = 9, command = self.Info)
 
+        self.resetbutton = Button(self.SearchFrame, font = ("HYHeadLine", 10, "bold"), text = "초기화", bd = 3,
+                                  width = 9, command = self.Reset)
+        self.setpage = Entry(self.SearchFrame, font=("HYHeadLine", 15, "bold"), width=6, bd=3, relief="ridge")
+
         #영화 목록 호출
         self.MovieListData = LoadXMLFromFileMovieList(self.movielistpage, self.moviename)
 
@@ -62,6 +74,7 @@ class MovieList():
 
     def Search(self):
         self.moviename = self.searchmovie.get() # 찾으려는 이름을 Entry에서 얻어옴
+        self.movielistpage = 1
         self.ResetMovieList() # 리스트 박스 리셋
 
     def Info(self):
@@ -76,19 +89,131 @@ class MovieList():
             for data in self.MovieListData.find_all("movie"):
                 if data.movienm.string == self.searchname[0]:
                     self.movieInfoData = LoadXMLFromFileMovieInfo(data.moviecd.string)
-                    print(data.moviecd.string)
-                    self.RenderMovieInfo()
                     break
         except:
             self.searchname = None
+        self.RenderMovieInfo()
 
     def RenderMovieInfo(self):
         if self.movieInfoData != None:
-            print(self.movieInfoData.find("moviecd").string)
-            print(self.movieInfoData.find("movienm").string)
+            self.movieinfocanvas.create_rectangle(0, 0, self.width / 2, 500, fill = "light blue")
+            naverAPI = LoadNaverAPI(self.movieInfoData.find("movienm").string)
+            image = None
+            rating = None
+            try:
+                for data in naverAPI['items']:
+                    name = data['title']
+                    name = name.replace(' ', '')
+                    name = name.replace('<', '')
+                    name = name.replace('>', '')
+                    name = name.replace('/', '')
+                    name = name.replace('b', '')
+                    if self.movieInfoData.find("movienm").string.replace(' ', '') == name:
+                        image = data['image']
+                        rating = data['userRating'] + "/10.0"
+            except:
+                image = None
+
+            self.movieinfocanvas.create_rectangle(15, 15, 185, 255, fill = 'black')
+
+            try:
+                if image != None:
+                    url = image
+                    with urllib.request.urlopen(url) as u:
+                        raw_data = u.read()
+                    im = Image.open(BytesIO(raw_data))
+                    im = im.resize((165, 235))
+                    self.movieImage = ImageTk.PhotoImage(im)
+                    self.movieinfocanvas.create_image(100, 135, image=self.movieImage)
+                else:
+                    self.movieinfocanvas.create_image(100, 135, image=self.noImage)
+            except:
+                self.movieinfocanvas.create_image(100, 135, image=self.noImage)
+
+            #print(self.movieInfoData.find("moviecd").string)
+            #print(self.movieInfoData.find("movienm").string)
+            titlecolor = 'black'
             for data in self.movieInfoData.find_all("movieinfo"):
-                self.movieinfocanvas.create_text(10, 10, font=("HYHeadLine", 15, "bold"), text=data.movienm.string)
-                print(data.movienm.string)
+                # =====================================================================================================
+                # 제목
+                if len(data.movienm.string) < 6:
+                    self.movieinfocanvas.create_text(325, 50, font=("Impact", 35, "bold"), text=data.movienm.string,fill=titlecolor)
+                elif len(data.movienm.string) < 8:
+                    self.movieinfocanvas.create_text(325, 55, font=("Impact", 31, "bold"), text=data.movienm.string, fill=titlecolor)
+                elif len(data.movienm.string) < 11:
+                    self.movieinfocanvas.create_text(320, 60, font=("Impact", 24, "bold"), text=data.movienm.string,fill=titlecolor)
+                elif len(data.movienm.string) < 12:
+                    self.movieinfocanvas.create_text(330, 65, font=("Impact", 20, "bold"), text=data.movienm.string, fill=titlecolor)
+                elif len(data.movienm.string) < 18:
+                    self.movieinfocanvas.create_text(320, 30, font=("Impact", 23, "bold"),text=data.movienm.string[:7], fill=titlecolor)
+                    self.movieinfocanvas.create_text(320, 70, font=("Impact", 23, "bold"), text=data.movienm.string[7:], fill=titlecolor)
+                else:
+                    self.movieinfocanvas.create_text(320, 30, font=("Impact", 18, "bold"),text=data.movienm.string[:10], fill=titlecolor)
+                    self.movieinfocanvas.create_text(320, 70, font=("Impact", 18, "bold"),text=data.movienm.string[10:25], fill=titlecolor)
+                # ====================================================================================================
+                self.movieinfocanvas.create_line(200, 100, 450, 100, width = 5) # 구분선
+                # ====================================================================================================
+                # 개봉일
+                try:
+                    day = data.opendt.string[:4] + "년" + data.opendt.string[4:6] + "월" + data.opendt.string[6:] + "일"
+                except:
+                    day = None
+                self.movieinfocanvas.create_text(230, 125, font=("Impact", 16, "bold"), text="개봉일",  fill='black')
+                self.movieinfocanvas.create_text(373, 125, font=("Impact", 16, "bold"), text=day, fill='black')
+                # ====================================================================================================
+                # 상영시간
+                self.movieinfocanvas.create_text(240, 155, font=("Impact", 16, "bold"), text="상영시간", fill='black')
+                try:
+                    self.movieinfocanvas.create_text(426, 155, font=("Impact", 16, "bold"),
+                                                     text=data.showtm.string + "분", fill='black')
+                except:
+                    pass
+                # ====================================================================================================
+                self.movieinfocanvas.create_line(200, 172, 450, 172, width=1)  # 구분선
+                # 장르
+                self.movieinfocanvas.create_text(220, 185, font=("Impact", 16, "bold"), text="장르", fill='black')
+                line = 0
+                for genre in data.find_all("genre"):
+                    self.movieinfocanvas.create_text(400, 185 + (line * 30), font=("Impact", 16, "bold"), text=genre.genrenm.string, fill='black')
+                    line += 1
+                    if line == 3:
+                        break
+                # ====================================================================================================
+                self.movieinfocanvas.create_line(20, 262, 450, 262, width=5)  # 구분선
+                # ====================================================================================================
+                # 감독
+                self.movieinfocanvas.create_text(220, 280, font=("Impact", 16, "bold"), text="감독", fill='black')
+                line = 0
+                for director in data.find_all('director'):
+                    words = len(director.peoplenm.string)
+                    self.movieinfocanvas.create_text(450 - (words * 10), 280 + (line * 30), font=("Impact", 16, "bold"), text=director.peoplenm.string, fill='black')
+                    line += 1
+                    if line == 2:
+                        break
+                # ====================================================================================================
+                # 평점
+                self.movieinfocanvas.create_text(40, 280, font=("Impact", 16, "bold"), text="평점", fill='black')
+                self.movieinfocanvas.create_text(130, 280, font=("Impact", 16, "bold"), text=rating, fill='black')
+                self.movieinfocanvas.create_line(200, 330, 450, 330, width=2)  # 구분선
+                # ====================================================================================================
+                # 배우
+                self.movieinfocanvas.create_text(220, 350, font=("Impact", 16, "bold"), text="배우", fill='black')
+                line = 0
+                for actor in data.find_all('actor'):
+                    words = len(actor.peoplenm.string)
+                    spaces = actor.peoplenm.string.count(' ')
+                    self.movieinfocanvas.create_text(450 - (words * 10) + (spaces * 5), 350 + (line * 30), font=("Impact", 16, "bold"),
+                                                     text=actor.peoplenm.string, fill='black')
+                    line += 1
+                    if line == 4:
+                        break
+                self.movieinfocanvas.create_line(195, 458, 450, 458, width=2)  # 구분선
+                self.movieinfocanvas.create_line(245, 262, 245, 458, width=2)  # 구분선
+                # ====================================================================================================
+                # 심의 등급
+                for grade in data.find_all('audit'):
+                    self.movieinfocanvas.create_text(100, 310, font=("Impact", 16, "bold"), text=grade.watchgradenm.string, fill='black')
+
         #http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.xml?key=e4ef9cc26c8da2fbd710c5899e835cd7&movieCd=20191590
 
     def NextMovie(self):
@@ -132,6 +257,13 @@ class MovieList():
         self.nextmoviebutton.place(x=355, y=110)
         self.prevmoviebutton.place(x=355, y=140)
         self.infobutton.place(x=355, y= 170)
+        self.resetbutton.place(x=355, y = 230)
+        self.setpage.place(x=355, y= 400)
+
+    def Reset(self):
+        self.movielistpage = 1
+        self.searchname = None
+        self.ResetMovieList()
 
     def GetFrame(self):
         return self.SearchFrame

@@ -7,6 +7,8 @@ import http.client
 import geocoder
 import json
 import requests
+import os
+import sys
 
 DAILY = (0,)
 WEEKLY = (1,)
@@ -51,7 +53,7 @@ def LoadXMLFromFileMovieInfo(code):
     savename = "MovieInfo.xml"
     url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.xml"
     key = "e4ef9cc26c8da2fbd710c5899e835cd7"
-    url = url + "?key=" + key +"&movieCd=" + str(code)
+    url = url + "?key=" + key +"&movieCd=" + code
     data = urllib.request.urlopen(url).read()
     text = data.decode('utf-8')
     req.urlretrieve(url, savename)
@@ -131,7 +133,7 @@ def LoadXMLFromFileActorList(page, name, movie):
 #</people>
 
 
-def LoadXMLFromFileMovieInfo(code):
+def LoadXMLFromFileActorInfo(code):
     # 배우 코드로 조회하는 영화 상세정보 peopleCd값
     Data = None
     savename = "ActorInfo.xml"
@@ -150,16 +152,24 @@ def LoadXLSFromFileTheater():
     Data = Data.worksheets[0]
     return Data
 
-def NaverAPI():
-    server = 'openapi.naver.com'
-    client_id = 'CauJEcypbFDul3iDdw3V'
-    client_secret = '1gsH15h8bj'
-    conn = http.client.HTTPSConnection(server)
-    conn.request('GET', '/v1/serch/book.xml?query=love&display=10&start=1',None,
-                 {'X-Naver-Clinet-Id':client_id, 'X-Naver-Client-Secret':client_secret})
-    req = conn.getresponse()
-    cLen = req.getheader("Content-Length")
-    req.read(int(cLen))
+def LoadNaverAPI(moviename):
+    client_id = "CauJEcypbFDul3iDdw3V"
+    client_secret = "1gsH15h8bj"
+    encText = urllib.parse.quote(moviename)
+    url = "https://openapi.naver.com/v1/search/movie.json?query=" + encText  # json 결과
+    #url = "https://openapi.naver.com/v1/search/movie.xml?query=" + encText # xml 결과
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id", client_id)
+    request.add_header("X-Naver-Client-Secret", client_secret)
+    response = urllib.request.urlopen(request)
+    rescode = response.getcode()
+    if (rescode == 200):
+        response_body = response.read()
+        #print(response_body.decode('utf-8'))
+        return json.loads(response_body.decode('utf-8'))
+    else:
+        print("Error Code:" + rescode)
+        return None
 
 # tkinter 버튼 함수
 # command로 인자받는법 : 람다함수 사용
@@ -171,5 +181,10 @@ if __name__ == '__main__': # ReadData.py를 실행시킬때만 실행되는 내�
     recvd = requests.get(url)
     loc = json.loads(recvd.text)
     print(loc["lat"])
+
+    Data = LoadNaverAPI("터치")
+    for data in Data['items']:
+        print(data['director'].split("|")[0])
+    #print(Data['items'])
 else:
     pass

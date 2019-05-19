@@ -52,6 +52,7 @@ class Ranking():
                                         command=self.NextRanking)
         self.prevrankingbutton = Button(self.frameranking1, font=("consolas", 10, "bold"), text="이전 페이지",
                                         command=self.PrevRanking)
+        self.creategraphbutton = Button(self.frameranking1, font = self.font, text = "통계", command = self.CreateGraph)
         # self.BoxofficeData = LoadXMLFromBoxofficeData(self.boxofficetype, self.date);
 
     def SetRanking(self, set):
@@ -108,7 +109,7 @@ class Ranking():
                         self.rankcanvas[i].create_text(150, 50, font=("Impact", 20, "bold"), text=data.movienm.string[7:], fill = titlecolor)
                     else:
                         self.rankcanvas[i].create_text(150, 25, font=("Impact", 14, "bold"), text=data.movienm.string[:10], fill = titlecolor)
-                        self.rankcanvas[i].create_text(150, 50, font=("Impact", 14, "bold"), text=data.movienm.string[10:], fill = titlecolor)
+                        self.rankcanvas[i].create_text(150, 50, font=("Impact", 14, "bold"), text=data.movienm.string[10:22], fill = titlecolor)
                     # ===제목===========================================================================
                     if int(data.rankinten.string) < 0:
                         self.rankcanvas[i].create_text(30, 75, font=("Impact", 12), text=data.rankinten.string, fill = "red")
@@ -159,6 +160,7 @@ class Ranking():
         self.datelabel.place(x = 20, y = 100)
         self.nextrankingbutton.place(x = 200, y = 70)
         self.prevrankingbutton.place(x=100, y=70)
+        self.creategraphbutton.place(x=380, y = 35)
 
     def NextRanking(self):
         if not self.BoxofficeData == None:
@@ -169,6 +171,33 @@ class Ranking():
             if self.startrank > 1:
                 self.startrank -= 1
             self.SetRanking(False)
+
+    def CreateGraph(self):
+        menubar = Menu(self.RankingFrame)
+        menu1 = Menu(menubar, tearoff=0)
+        menu1.add_command(label='하위메뉴 1-1')
+        menu1.add_separator()
+        menu1.add_command(label='1-2')
+        menubar.add_cascade(label = '상위메뉴 1', menu = menu1)
+
+        toplevel = Toplevel(self.RankingFrame, menu = menubar)
+        toplevel.geometry("800x400+400+400")
+        toplevel.resizable(False,False)
+        toplevel.title("Ranking Graph")
+
+        self.Canvas = Canvas(toplevel, width = 800, height = 350, background = 'light blue')
+        self.RenderGraph()
+
+    def RenderGraph(self):
+        self.Canvas.create_line(0, 2, 800, 2, width=5)
+        self.Canvas.create_line(0, 350, 30, 320, width = 1)
+        self.Canvas.create_line(30, 320, 30, 0, width = 1)
+        self.Canvas.create_line(30, 320, 770, 320, width=1)
+        self.Canvas.create_line(770, 320, 800, 350, width=1)
+        self.Canvas.create_line(770, 320, 770, 0, width=1)
+        self.Canvas.create_line(0, 350, 800, 350, width=5)
+
+        self.Canvas.pack()
 
     def GetFrame(self):
         return self.RankingFrame
