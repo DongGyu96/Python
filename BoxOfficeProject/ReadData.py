@@ -14,6 +14,7 @@ from io import BytesIO
 import urllib
 import urllib.request
 from PIL import Image,ImageTk
+import webbrowser
 
 DAILY = (0,)
 WEEKLY = (1,)
@@ -202,12 +203,8 @@ def LoadNaverAPIToImage(name):
         print("Error Code:" + rescode)
         return None
 
-def LoadImageFromURL1(url, width, height):
-    raw_data = urllib.request.urlopen(url).read()
-    im = Image.open(BytesIO(raw_data))
-    im = im.resize((width, height))
-    data = ImageTk.PhotoImage(im)
-    return data
+def OpenWebBrowser(url):
+    webbrowser.open_new(url)
 
 # tkinter 버튼 함수
 # command로 인자받는법 : 람다함수 사용

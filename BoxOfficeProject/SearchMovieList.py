@@ -2,12 +2,6 @@ from tkinter import *
 from tkinter.font import *
 from ReadData import *
 
-
-from io import BytesIO
-import urllib
-import urllib.request
-from PIL import Image,ImageTk
-
 class MovieList():
     def __init__(self, window, width, height):
         self.moviename = None
@@ -35,6 +29,8 @@ class MovieList():
         self.movielistscrollbar["command"] = self.movielistbox.yview
         self.movieinfocanvas = Canvas(self.framesearch2, width=self.width / 2 - 10, height=500, bd=4, relief="ridge",
                                       background="light blue")
+        self.movieinfocanvas.bind("<Button-1>", self.Click)
+        self.find = False
 
         self.SearchFrameLabel = Label(self.framesearch1, font=("Impact", 25, "bold"), text="영화 상세 정보")
 
@@ -57,6 +53,7 @@ class MovieList():
 
         self.movielistsize = 0
         self.movieInfoData = None # 영화 상세 정보를 저장할 변수
+        self.url = None # 네이버 영화페이지 주소
 
         i = 0 # 리스트박스는 배열처럼 쓰기 때문에 일종의 인덱스 표현을 위해서
         find = False
@@ -97,7 +94,7 @@ class MovieList():
     def RenderMovieInfo(self):
         if self.movieInfoData != None:
             self.movieinfocanvas.create_rectangle(0, 0, self.width / 2, 500, fill = "light blue")
-            naverAPI = LoadNaverAPI(self.movieInfoData.find("movienm").string)
+            naverAPI = LoadNaverAPIToMovie(self.movieInfoData.find("movienm").string)
             image = None
             rating = None
             try:
@@ -111,24 +108,27 @@ class MovieList():
                     if self.movieInfoData.find("movienm").string.replace(' ', '') == name:
                         image = data['image']
                         rating = data['userRating'] + "/10.0"
+                        url = data['link']
             except:
                 image = None
+                url = None
 
             self.movieinfocanvas.create_rectangle(15, 15, 185, 255, fill = 'black')
 
             try:
                 if image != None:
-                    url = image
-                    with urllib.request.urlopen(url) as u:
-                        raw_data = u.read()
-                    im = Image.open(BytesIO(raw_data))
-                    im = im.resize((165, 235))
-                    self.movieImage = ImageTk.PhotoImage(im)
+                    self.movieImage = LoadImageFromURL(image, 165, 235)
                     self.movieinfocanvas.create_image(100, 135, image=self.movieImage)
+                    self.find = True
+                    self.url = url
                 else:
                     self.movieinfocanvas.create_image(100, 135, image=self.noImage)
+                    self.find = False
+                    self.url = None
             except:
                 self.movieinfocanvas.create_image(100, 135, image=self.noImage)
+                self.find = False
+                self.url = None
 
             #print(self.movieInfoData.find("moviecd").string)
             #print(self.movieInfoData.find("movienm").string)
@@ -213,6 +213,10 @@ class MovieList():
                 # 심의 등급
                 for grade in data.find_all('audit'):
                     self.movieinfocanvas.create_text(100, 310, font=("Impact", 16, "bold"), text=grade.watchgradenm.string, fill='black')
+                # ====================================================================================================
+                if image != None: # 하이퍼링크 텍스트
+                    self.movieinfocanvas.create_text(100, 400, font=("Impact", 16, "bold"), text="[네이버로 보기]", fill='royalblue1')
+                # ====================================================================================================
 
         #http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.xml?key=e4ef9cc26c8da2fbd710c5899e835cd7&movieCd=20191590
 
@@ -224,6 +228,15 @@ class MovieList():
         if self.movielistpage > 1:
             self.movielistpage -= 1
         self.ResetMovieList()
+
+    def Click(self, event):
+        if self.find == False:
+            return
+
+        if event.x > 35 and event.x < 175: # 네이버로 보기 라벨 클릭
+            if event.y > 390 and event.y < 410:
+                if self.url != None:
+                    OpenWebBrowser(self.url)
 
     def ResetMovieList(self):
         self.MovieListData = LoadXMLFromFileMovieList(self.movielistpage, self.moviename)
@@ -262,7 +275,7 @@ class MovieList():
 
     def Reset(self):
         self.movielistpage = 1
-        self.searchname = None
+        self.moviename = None
         self.ResetMovieList()
 
     def GetFrame(self):
