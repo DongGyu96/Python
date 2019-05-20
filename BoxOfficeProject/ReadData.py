@@ -36,8 +36,6 @@ def LoadXMLFromFileBoxOffice(type, date):
     # type == 1 : 일간 박스오피스
     # else : 주간 박스오피스
     # date = yyyymmdd   ex)20190330
-    Data = None
-    savename = "BoxOffice.xml"
     if type == DAILY:
         url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.xml"
     else:
@@ -45,54 +43,37 @@ def LoadXMLFromFileBoxOffice(type, date):
     key = "70fb64767aa3cd31fb488fe55820bf17"
     url = url + "?key=" + key +"&targetDt=" + str(date)
     data = urllib.request.urlopen(url).read()
-    text = data.decode('utf-8')
-
-    req.urlretrieve(url, savename)
-
-    xml = open(savename, "r", encoding="utf-8").read()
-    Data = BeautifulSoup(xml, "html.parser")
+    Data = BeautifulSoup(data, "html.parser")
     return Data
 
 def LoadXMLFromFileMovieInfo(code):
     # 영화 코드로 조회하는 영화 상세정보 movieCd값
-    Data = None
-    savename = "MovieInfo.xml"
     url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.xml"
     key = "e4ef9cc26c8da2fbd710c5899e835cd7"
     url = url + "?key=" + key +"&movieCd=" + code
     data = urllib.request.urlopen(url).read()
-    text = data.decode('utf-8')
-    req.urlretrieve(url, savename)
 
-    xml = open(savename, "r", encoding="utf-8").read()
-    Data = BeautifulSoup(xml, "html.parser")
+    Data = BeautifulSoup(data, "html.parser")
     return Data
 
 Filter = ["엄마", "팬티", "불륜", "무삭제", "섹스", "은밀", "유부녀", "숙모", "형수", "섹드립", "스와핑", "탐하기", "초흥분", "흠뻑", "오르가즘", "출장", "음란",
           "여고생", "장모님", "친구 누나", "의붓", "여동생", "친척 누나", "여직원", "친척누나", "누나 친구", "정사", "친구아빠", "발정", "알몸", "여사장", "비밀수업", "나의 노예", "순결", "딸의 친구", "친구 아내", "업소녀"]
 def LoadXMLFromFileMovieList(page, name):
     # 영화 목록
-    Data = None
-    savename = "MovieList.xml"
     url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.xml"
     key = "70fb64767aa3cd31fb488fe55820bf17"
     url = url + "?key=" + key + "&curPage=" + str(page) + "&itemPerPage=50"
     if name != None:
         name = urllib.parse.quote(name)
         url = url + "&movieNm=" + name
-        #url = url.encode('utf-8')
     data = urllib.request.urlopen(url).read()
-    req.urlretrieve(url, savename)
 
-    xml = open(savename, "r", encoding="utf-8").read()
-    Data = BeautifulSoup(xml, "html.parser")
+    Data = BeautifulSoup(data, "html.parser")
     return Data
 
 
 # 배우 목록 데이터
 def LoadXMLFromFileActorList(page, name, movie):
-    Data = None
-    savename = "ActorList.xml"
     url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleList.xml"
     key = "70fb64767aa3cd31fb488fe55820bf17"
     url = url + "?key=" + key + "&curPage=" + str(page) + "&itemPerPage=50"
@@ -104,9 +85,7 @@ def LoadXMLFromFileActorList(page, name, movie):
         movie = urllib.parse.quote(movie)
         url = url + "&filmoNames=" + movie
     data = urllib.request.urlopen(url).read()
-    req.urlretrieve(url, savename)
-    xml = open(savename, "r", encoding="utf-8").read()
-    Data = BeautifulSoup(xml, "html.parser")
+    Data = BeautifulSoup(data, "html.parser")
     return Data
 
 #데이터를 뽑아낼 때
@@ -141,16 +120,11 @@ def LoadXMLFromFileActorList(page, name, movie):
 
 def LoadXMLFromFileActorInfo(code):
     # 배우 코드로 조회하는 영화 상세정보 peopleCd값
-    Data = None
-    savename = "ActorInfo.xml"
     url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleInfo.xml"
     key = "e4ef9cc26c8da2fbd710c5899e835cd7"
     url = url + "?key=" + key +"&peopleCd=" + str(code)
     data = urllib.request.urlopen(url).read()
-    text = data.decode('utf-8')
-    req.urlretrieve(url, savename)
-    xml = open(savename, "r", encoding="utf-8").read()
-    Data = BeautifulSoup(xml, "html.parser")
+    Data = BeautifulSoup(data, "html.parser")
     return Data
 
 def LoadXLSFromFileTheater():
@@ -211,11 +185,14 @@ def OpenWebBrowser(url):
 # command = lambda index = i: func(index)
 
 if __name__ == '__main__': # ReadData.py를 실행시킬때만 실행되는 내용
-    ip = geocoder.ipinfo('me').ip
-    url = 'http://ip-api.com/json/' + ip
-    recvd = requests.get(url)
-    loc = json.loads(recvd.text)
-    print(loc["lat"])
+    #ip = geocoder.ipinfo('me').ip
+    #url = 'http://ip-api.com/json/' + ip
+    #recvd = requests.get(url)
+    #loc = json.loads(recvd.text)
+    #print(loc["lat"])
+
+    Data = LoadXMLFromFileBoxOffice(DAILY, "20190518")
+    print(Data)
 
     #Data = LoadNaverAPIToMovie("터치")
     #for data in Data['items']:
