@@ -26,33 +26,17 @@ class ActorList():
         self.PrevBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="이전 페이지", bd=3, width=9, command=self.Prev)
 
         self.ListPage = 1
-        self.TotalPage = 1
-        self.TotalPage = self.GetTotalPage()
-        #print(self.TotalPage)
-        #self.InsertTotalData()
-        self.ActorListData = LoadXMLFromFileActorList(self.ListPage, None, None)        # page = 1, name 이랑 movie를 none으로 인자를 넣으면 전체목록을 부름
         self.InsertActorList()
 
         self.InfoFrame = Frame(self.Background, width = self.width / 2, height = self.height, bg = "light blue", bd = 6, relief = "ridge")
         #self.InfoCanvas = Canvas(self.InfoFrame, width=self.width / 2 - 10, height=500, bd=4, relief="ridge", bg="light blue")
 
-    def InsertTotalData(self):
-        for i in range(self.TotalPage):
-            self.ActorListData = LoadXMLFromFileActorList(i, None, None)  # page = 1, name 이랑 movie를 none으로 인자를 넣으면 전체목록을 부름
-            self.InsertActorList()
-
-    def GetTotalPage(self):
-        page = 177981 // 50
-        if (177981 % 50) > 0:
-            page += 1
-
-        return page
-
     def ActorPersons(self):
         self. Persons = self.ActorListData.find_all("totCnt")
         print(self.Persons)
 
-    def InsertActorList(self):
+    def InsertActorList(self, page = 1):
+        self.ActorListData = LoadXMLFromFileActorList(self.ListPage, None, None)  # page = 1, name 이랑 movie를 none으로 인자를 넣으면 전체목록을 부름
         i = 0  # 리스트박스는 배열처럼 쓰기 때문에 일종의 인덱스 표현을 위해서
         find = False
         for data in self.ActorListData.find_all("people"):
@@ -60,14 +44,26 @@ class ActorList():
             i += 1
         # 리스트박스에 몇개를 집어넣었는지 알고 있어야 함
 
+    def ClearActorList(self):
+        self.ActorListBox.delete(0, self.ActorListBox.size() - 1)
+        #print(self.ActorListBox.size())
+
+
     def Search(self):
         pass
 
     def Next(self):
         self.ListPage += 1
+        self.ClearActorList()
+        self.InsertActorList(self.ListPage)
 
     def Prev(self):
-        pass
+        if self.ListPage == 1:
+            return
+        self.ListPage -= 1
+        self.ClearActorList()
+        self.InsertActorList(self.ListPage)
+
 
     def Render(self):
         self.InfoFrame.pack(side = RIGHT, expand=True)
