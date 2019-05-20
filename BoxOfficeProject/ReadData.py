@@ -177,6 +177,25 @@ def LoadNaverAPIToImage(name):
         print("Error Code:" + rescode)
         return None
 
+def LoadNaverAPIToNews(name):
+    client_id = "CauJEcypbFDul3iDdw3V"
+    client_secret = "1gsH15h8bj"
+    encText = urllib.parse.quote(name)
+    url = "https://openapi.naver.com/v1/search/news.json?query=" + encText  # json 결과
+    # url = "https://openapi.naver.com/v1/search/movie.xml?query=" + encText # xml 결과
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id", client_id)
+    request.add_header("X-Naver-Client-Secret", client_secret)
+    response = urllib.request.urlopen(request)
+    rescode = response.getcode()
+    if (rescode == 200):
+        response_body = response.read()
+        # print(response_body.decode('utf-8'))
+        return json.loads(response_body.decode('utf-8'))
+    else:
+        print("Error Code:" + rescode)
+        return None
+
 def OpenWebBrowser(url):
     webbrowser.open_new(url)
 
@@ -191,17 +210,17 @@ if __name__ == '__main__': # ReadData.py를 실행시킬때만 실행되는 내�
     #loc = json.loads(recvd.text)
     #print(loc["lat"])
 
-    Data = LoadXMLFromFileBoxOffice(DAILY, "20190518")
-    print(Data)
+    #Data = LoadXMLFromFileBoxOffice(DAILY, "20190518")
+    #print(Data)
 
     #Data = LoadNaverAPIToMovie("터치")
     #for data in Data['items']:
     #    print(data['director'].split("|")[0])
     #print(Data['items'])
 
-    #Data = LoadNaverAPIToImage("박보영")
+    Data = LoadNaverAPIToNews("박보영")
     #image = []
-    #print(Data)
+    print(Data)
     #for data in Data['items']:
     #    print(data['link'])
     #    image.append(LoadImageFromURL1(data['link'], 165, 235))
