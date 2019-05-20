@@ -1,13 +1,14 @@
 from tkinter import *
 from tkinter.font import *
 from ReadData import *
+from RankingGraph import *
 
 class Ranking():
     def __init__(self, window, width, height):
         self.boxofficeimage = PhotoImage(file="image/Ranking2.png")
         self.BoxofficeData = None
         self.boxofficetype = None
-
+        self.Graph = None
         self.startrank = 1
         self.date = 0
         self.RankingFrame = Frame(window, bd=2, relief="solid")
@@ -70,7 +71,16 @@ class Ranking():
             self.startrank = 1
             self.BoxofficeData = LoadXMLFromFileBoxOffice(self.boxofficetype, self.date)
 
-        self.datelabel = Label(self.RankingFrame, font = ("Bernard MT", 22, "bold"), text = self.BoxofficeData.showrange.string)
+        if self.boxofficetype == DAILY:
+            date = self.BoxofficeData.showrange.string[:4] + "년" + self.BoxofficeData.showrange.string[4:6] + "월" +\
+                   self.BoxofficeData.showrange.string[6:8] + "일                                          "
+        else:
+            date = self.BoxofficeData.showrange.string[:4] + "년" + self.BoxofficeData.showrange.string[4:6] + "월" + \
+                   self.BoxofficeData.showrange.string[6:8] + "일 "
+            date = date + self.BoxofficeData.showrange.string[8:9] + " " + self.BoxofficeData.showrange.string[9:13] + "년" + \
+                   self.BoxofficeData.showrange.string[13:15] + "월" + self.BoxofficeData.showrange.string[15:] + "일"
+
+        self.datelabel = Label(self.RankingFrame, font = ("Bernard MT", 22, "bold"), text = date)
         self.RenderRanking()
         self.Render()
 
@@ -173,31 +183,8 @@ class Ranking():
             self.SetRanking(False)
 
     def CreateGraph(self):
-        menubar = Menu(self.RankingFrame)
-        menu1 = Menu(menubar, tearoff=0)
-        menu1.add_command(label='하위메뉴 1-1')
-        menu1.add_separator()
-        menu1.add_command(label='1-2')
-        menubar.add_cascade(label = '상위메뉴 1', menu = menu1)
-
-        toplevel = Toplevel(self.RankingFrame, menu = menubar)
-        toplevel.geometry("800x400+400+400")
-        toplevel.resizable(False,False)
-        toplevel.title("Ranking Graph")
-
-        self.Canvas = Canvas(toplevel, width = 800, height = 350, background = 'light blue')
-        self.RenderGraph()
-
-    def RenderGraph(self):
-        self.Canvas.create_line(0, 2, 800, 2, width=5)
-        self.Canvas.create_line(0, 350, 30, 320, width = 1)
-        self.Canvas.create_line(30, 320, 30, 0, width = 1)
-        self.Canvas.create_line(30, 320, 770, 320, width=1)
-        self.Canvas.create_line(770, 320, 800, 350, width=1)
-        self.Canvas.create_line(770, 320, 770, 0, width=1)
-        self.Canvas.create_line(0, 350, 800, 350, width=5)
-
-        self.Canvas.pack()
+        if self.BoxofficeData != None:
+            self.Graph = RankingGraph(self.RankingFrame, self.boxofficetype, self.BoxofficeData)
 
     def GetFrame(self):
         return self.RankingFrame

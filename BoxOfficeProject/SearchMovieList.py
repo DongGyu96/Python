@@ -32,7 +32,7 @@ class MovieList():
         self.movieinfocanvas.bind("<Button-1>", self.Click)
         self.find = False
 
-        self.SearchFrameLabel = Label(self.framesearch1, font=("Impact", 25, "bold"), text="영화 상세 정보")
+        self.SearchFrameLabel = Label(self.framesearch1, font=("Impact", 25, "bold"), text="영화 상세 정보", bg = "light blue")
 
         self.searchmovie = Entry(self.framesearch1, font=("HYHeadLine", 15, "bold"), width=31, bd=6, relief="ridge")
         self.searchmoviebutton = Button(self.SearchFrame, font=("HYHeadLine", 14, "bold"), text="검색", width=6,
@@ -46,8 +46,9 @@ class MovieList():
 
         self.resetbutton = Button(self.SearchFrame, font = ("HYHeadLine", 10, "bold"), text = "초기화", bd = 3,
                                   width = 9, command = self.Reset)
-        self.setpage = Entry(self.SearchFrame, font=("HYHeadLine", 15, "bold"), width=6, bd=3, relief="ridge")
-
+        self.setpage = Entry(self.SearchFrame, font=("HYHeadLine", 15, "bold"), width=7, bd=3, relief="ridge")
+        self.setpage.insert(0, str(self.movielistpage))
+        self.pagelabel = Label(self.SearchFrame, font =("HYHeadLine", 15, "bold"), text = "[Page]", bg = "light blue")
         #영화 목록 호출
         self.MovieListData = LoadXMLFromFileMovieList(self.movielistpage, self.moviename)
 
@@ -223,10 +224,14 @@ class MovieList():
     def NextMovie(self):
         # 페이지를 증가시키고 리스트 박스 리셋
         self.movielistpage += 1
+        self.setpage.delete(0, len(self.setpage.get()))
+        self.setpage.insert(0, str(self.movielistpage))
         self.ResetMovieList()
     def PrevMovie(self):
         if self.movielistpage > 1:
             self.movielistpage -= 1
+            self.setpage.delete(0, len(self.setpage.get()))
+            self.setpage.insert(0, str(self.movielistpage))
         self.ResetMovieList()
 
     def Click(self, event):
@@ -239,6 +244,7 @@ class MovieList():
                     OpenWebBrowser(self.url)
 
     def ResetMovieList(self):
+        self.movielistpage = eval(self.setpage.get())
         self.MovieListData = LoadXMLFromFileMovieList(self.movielistpage, self.moviename)
         # 검색하려는 페이지와 이름을 넣어서 반환받음
 
@@ -271,11 +277,13 @@ class MovieList():
         self.prevmoviebutton.place(x=355, y=140)
         self.infobutton.place(x=355, y= 170)
         self.resetbutton.place(x=355, y = 230)
-        self.setpage.place(x=355, y= 400)
+        self.setpage.place(x=355, y= 430)
+        self.pagelabel.place(x=360, y = 400)
 
     def Reset(self):
         self.movielistpage = 1
         self.moviename = None
+        self.searchmovie.delete(0, len(self.searchmovie.get()))
         self.ResetMovieList()
 
     def GetFrame(self):
