@@ -3,12 +3,17 @@ from bs4 import BeautifulSoup
 import urllib.request as req
 import urllib.parse
 from openpyxl import load_workbook
+from tkinter import *
 import http.client
 import geocoder
 import json
 import requests
 import os
 import sys
+from io import BytesIO
+import urllib
+import urllib.request
+from PIL import Image,ImageTk
 
 DAILY = (0,)
 WEEKLY = (1,)
@@ -152,7 +157,7 @@ def LoadXLSFromFileTheater():
     Data = Data.worksheets[0]
     return Data
 
-def LoadNaverAPI(moviename):
+def LoadNaverAPIToMovie(moviename):
     client_id = "CauJEcypbFDul3iDdw3V"
     client_secret = "1gsH15h8bj"
     encText = urllib.parse.quote(moviename)
@@ -171,6 +176,39 @@ def LoadNaverAPI(moviename):
         print("Error Code:" + rescode)
         return None
 
+def LoadImageFromURL(url, width, height):
+    raw_data = urllib.request.urlopen(url).read()
+    im = Image.open(BytesIO(raw_data))
+    im = im.resize((width, height))
+    data = ImageTk.PhotoImage(im)
+    return data
+
+def LoadNaverAPIToImage(name):
+    client_id = "CauJEcypbFDul3iDdw3V"
+    client_secret = "1gsH15h8bj"
+    encText = urllib.parse.quote(name)
+    url = "https://openapi.naver.com/v1/search/image.json?query=" + encText  # json 결과
+    # url = "https://openapi.naver.com/v1/search/movie.xml?query=" + encText # xml 결과
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id", client_id)
+    request.add_header("X-Naver-Client-Secret", client_secret)
+    response = urllib.request.urlopen(request)
+    rescode = response.getcode()
+    if (rescode == 200):
+        response_body = response.read()
+        # print(response_body.decode('utf-8'))
+        return json.loads(response_body.decode('utf-8'))
+    else:
+        print("Error Code:" + rescode)
+        return None
+
+def LoadImageFromURL1(url, width, height):
+    raw_data = urllib.request.urlopen(url).read()
+    im = Image.open(BytesIO(raw_data))
+    im = im.resize((width, height))
+    data = ImageTk.PhotoImage(im)
+    return data
+
 # tkinter 버튼 함수
 # command로 인자받는법 : 람다함수 사용
 # command = lambda index = i: func(index)
@@ -182,9 +220,17 @@ if __name__ == '__main__': # ReadData.py를 실행시킬때만 실행되는 내�
     loc = json.loads(recvd.text)
     print(loc["lat"])
 
-    Data = LoadNaverAPI("터치")
-    for data in Data['items']:
-        print(data['director'].split("|")[0])
+    #Data = LoadNaverAPIToMovie("터치")
+    #for data in Data['items']:
+    #    print(data['director'].split("|")[0])
     #print(Data['items'])
+
+    #Data = LoadNaverAPIToImage("박보영")
+    #image = []
+    #print(Data)
+    #for data in Data['items']:
+    #    print(data['link'])
+    #    image.append(LoadImageFromURL1(data['link'], 165, 235))
+    #    # link의 이미지가 너무 크면 thumbnail 로 썸네일 이미지로 가져올수도 있음
 else:
     pass
