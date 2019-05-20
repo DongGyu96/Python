@@ -24,6 +24,7 @@ class ActorList():
         self.ActorListScrollbar["command"] = self.ActorListBox.yview
         self.NextBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="다음 페이지", bd=3, width=9, command=self.Next)
         self.PrevBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="이전 페이지", bd=3, width=9, command=self.Prev)
+        self.InfoBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="정보 보기", bd=3, width=9, command=self.Info)
 
         self.ListPage = 1
         self.InsertActorList()
@@ -31,26 +32,23 @@ class ActorList():
         self.InfoFrame = Frame(self.Background, width = self.width / 2, height = self.height, bg = "light blue", bd = 6, relief = "ridge")
         #self.InfoCanvas = Canvas(self.InfoFrame, width=self.width / 2 - 10, height=500, bd=4, relief="ridge", bg="light blue")
 
-    def ActorPersons(self):
-        self. Persons = self.ActorListData.find_all("totCnt")
-        print(self.Persons)
-
-    def InsertActorList(self, page = 1):
-        self.ActorListData = LoadXMLFromFileActorList(self.ListPage, None, None)  # page = 1, name 이랑 movie를 none으로 인자를 넣으면 전체목록을 부름
+    def InsertActorList(self, page = 1, name = None):
+        self.ActorListData = LoadXMLFromFileActorList(self.ListPage, name, None)  # page = 1, name 이랑 movie를 none으로 인자를 넣으면 전체목록을 부름
         i = 0  # 리스트박스는 배열처럼 쓰기 때문에 일종의 인덱스 표현을 위해서
         find = False
         for data in self.ActorListData.find_all("people"):
-            self.ActorListBox.insert(i, data.peoplenm.string)
-            i += 1
+            if data.reprolenm.string == "배우":
+                self.ActorListBox.insert(i, data.peoplenm.string)
+                i += 1
         # 리스트박스에 몇개를 집어넣었는지 알고 있어야 함
 
     def ClearActorList(self):
         self.ActorListBox.delete(0, self.ActorListBox.size() - 1)
-        #print(self.ActorListBox.size())
-
 
     def Search(self):
-        pass
+        ActorName = self.SearchEntry.get()
+        self.ClearActorList()
+        self.InsertActorList(self.ListPage, ActorName)
 
     def Next(self):
         self.ListPage += 1
@@ -63,6 +61,11 @@ class ActorList():
         self.ListPage -= 1
         self.ClearActorList()
         self.InsertActorList(self.ListPage)
+
+    def Info(self):
+        index = self.ActorListBox.curselection()
+        ActorName = self.ActorListBox.get(index)
+        print(ActorName)
 
 
     def Render(self):
@@ -78,7 +81,7 @@ class ActorList():
         self.ActorListScrollbar.pack(side=LEFT, fill="y")
         self.NextBnt.place(x = 355, y = 10)
         self.PrevBnt.place(x = 355, y = 40)             # 버튼 간격 30씩
-
+        self.InfoBnt.place(x = 355, y = 70)
         #self.InfoCanvas.place(x = 0, y = 0)
 
     def GetFrame(self):
