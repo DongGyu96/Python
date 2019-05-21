@@ -11,12 +11,11 @@ class RankingGraph:
         self.menubar.add_cascade(label='상위메뉴 1', menu=self.menu1)
 
         self.GraphFrame = Toplevel(window, menu=self.menubar)
-        self.GraphFrame.geometry("800x400+400+400")
+        self.GraphFrame.geometry("800x400+800+400")
         self.GraphFrame.resizable(False, False)
         self.GraphFrame.title("Ranking Graph")
 
         self.Canvas = Canvas(self.GraphFrame, width=800, height=350, background='light blue')
-        self.Canvas.create_line(0, 2, 800, 2, width=5)
         self.Canvas.create_line(0, 350, 30, 320, width=1)
         self.Canvas.create_line(30, 320, 30, 0, width=1)
         self.Canvas.create_line(30, 320, 830, 320, width=1)
@@ -46,19 +45,62 @@ class RankingGraph:
 
         for data in self.value:
             if data.today > MaxValue.today:
-                MaxValue = data
+                MaxValue.today = data.today
+            if data.totalday > MaxValue.totalday:
+                MaxValue.totalday = data.totalday
+            if data.prevday > MaxValue.prevday:
+                MaxValue.prevday = data.prevday
 
         for i in range(self.count):
-            height = self.value[i].today / MaxValue.today * 300
-            self.Canvas.create_rectangle(45 + (i * 75), 340, 60 + (i * 75), 340 - height, fill="white")
+            color = 'gray'
+            height = (self.value[i].totalday - self.value[i].today) / MaxValue.totalday * 320
+            self.Canvas.create_rectangle(30 + (i * 75), 340, 45 + (i * 75), 340 - height, fill=color)
+            self.Canvas.create_polygon(30 + (i * 75), 340 - height, 40 + (i * 75), 340 - height - 10,
+                                       55 + (i * 75), 340 - height - 10, 45 + (i * 75), 340 - height, fill=color,
+                                       outline="black")
+            self.Canvas.create_polygon(55 + (i * 75), 340 - height - 10, 55 + (i * 75), 330,
+                                       45 + (i * 75), 340, 45 + (i * 75), 340 - height, fill=color,
+                                       outline="black")
+
+            color = "SteelBlue3"
+            startheight = height
+            height = self.value[i].today / MaxValue.totalday * 320
+            self.Canvas.create_rectangle(30 + (i * 75), 340 - startheight, 45 + (i * 75), 340 - height - startheight, fill=color)
+            self.Canvas.create_polygon(30 + (i * 75), 340 - height - startheight, 40 + (i * 75), 340 - height - 10 - startheight,
+                                       55 + (i * 75), 340 - height - 10 - startheight, 45 + (i * 75), 340 - height - startheight, fill=color,
+                                       outline="black")
+            self.Canvas.create_polygon(55 + (i * 75), 340 - height - 10 - startheight, 55 + (i * 75), 330 - startheight,
+                                       45 + (i * 75), 340 - startheight, 45 + (i * 75), 340 - height - startheight, fill=color,
+                                       outline="black")
+
+            color = "SteelBlue1"
+            height = self.value[i].today / MaxValue.today * 150
+            self.Canvas.create_rectangle(45 + (i * 75), 340, 60 + (i * 75), 340 - height, fill=color)
             self.Canvas.create_polygon(45 + (i * 75), 340 - height, 55 + (i * 75), 340 - height - 10,
-                                       70 + (i * 75), 340 - height - 10, 60 + (i * 75), 340 - height, fill="white",
+                                       70 + (i * 75), 340 - height - 10, 60 + (i * 75), 340 - height, fill=color,
                                        outline="black")
             self.Canvas.create_polygon(70 + (i * 75), 340 - height - 10, 70 + (i * 75), 330,
-                                       60 + (i * 75), 340, 60 + (i * 75), 340 - height, fill="white",
+                                       60 + (i * 75), 340, 60 + (i * 75), 340 - height, fill=color,
                                        outline="black")
 
+            if self.value[i].increment == self.value[i].today:
+                height = 1
+            else:
+                height = self.value[i].increment / MaxValue.today * 150
+            if height < 0:
+                height = height * -1
+                color = "red"
+            else:
+                color = "cyan"
+            self.Canvas.create_rectangle(60 + (i * 75), 340, 75 + (i * 75), 340 - height, fill=color)
+            self.Canvas.create_polygon(60 + (i * 75), 340 - height, 70 + (i * 75), 340 - height - 10,
+                                       85 + (i * 75), 340 - height - 10, 75 + (i * 75), 340 - height, fill=color,
+                                       outline="black")
+            self.Canvas.create_polygon(85 + (i * 75), 340 - height - 10, 85 + (i * 75), 330,
+                                       75 + (i * 75), 340, 75 + (i * 75), 340 - height, fill=color,
+                                       outline="black")
 
+        self.Canvas.create_line(0, 2, 800, 2, width=5)
         self.RenderGraph()
 
     def RenderGraph(self):
