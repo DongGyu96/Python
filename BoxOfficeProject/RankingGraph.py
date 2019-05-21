@@ -19,9 +19,9 @@ class RankingGraph:
         self.Canvas.create_line(0, 2, 800, 2, width=5)
         self.Canvas.create_line(0, 350, 30, 320, width=1)
         self.Canvas.create_line(30, 320, 30, 0, width=1)
-        self.Canvas.create_line(30, 320, 770, 320, width=1)
-        self.Canvas.create_line(770, 320, 800, 350, width=1)
-        self.Canvas.create_line(770, 320, 770, 0, width=1)
+        self.Canvas.create_line(30, 320, 830, 320, width=1)
+        #self.Canvas.create_line(770, 320, 800, 350, width=1)
+        #self.Canvas.create_line(770, 320, 770, 0, width=1)
         self.Canvas.create_line(0, 350, 800, 350, width=5)
 
         if type == DAILY:
@@ -32,9 +32,9 @@ class RankingGraph:
         self.value = []
         self.count = 0
         for data in Data.find_all(typename):
-            print(data.movienm.string)
             if self.count == 0:
                 self.labels.append(Label(self.GraphFrame, font=("HYHeadLine", 11, "bold"), text=str(self.count + 1) + "위", fg = "gold2"))
+                MaxValue = Value(data.audicnt.string, data.audiinten.string, data.audiacc.string)
             elif self.count < 2:
                 self.labels.append(Label(self.GraphFrame, font=("HYHeadLine", 11, "bold"), text=str(self.count + 1) + "위", fg = "SlateGray3"))
             elif self.count < 3:
@@ -44,8 +44,19 @@ class RankingGraph:
             self.value.append(Value(data.audicnt.string, data.audiinten.string, data.audiacc.string))
             self.count += 1
 
+        for data in self.value:
+            if data.today > MaxValue.today:
+                MaxValue = data
 
-        print(self.count)
+        for i in range(self.count):
+            height = self.value[i].today / MaxValue.today * 300
+            self.Canvas.create_rectangle(45 + (i * 75), 340, 60 + (i * 75), 340 - height, fill="white")
+            self.Canvas.create_polygon(45 + (i * 75), 340 - height, 55 + (i * 75), 340 - height - 10,
+                                       70 + (i * 75), 340 - height - 10, 60 + (i * 75), 340 - height, fill="white",
+                                       outline="black")
+            self.Canvas.create_polygon(70 + (i * 75), 340 - height - 10, 70 + (i * 75), 330,
+                                       60 + (i * 75), 340, 60 + (i * 75), 340 - height, fill="white",
+                                       outline="black")
 
 
         self.RenderGraph()
@@ -59,7 +70,6 @@ class RankingGraph:
 
 class Value:
     def __init__(self, today, prevday, totalday):
-
         self.today = eval(today)
         self.prevday = eval(today) - eval(prevday)
         self.totalday = eval(totalday)

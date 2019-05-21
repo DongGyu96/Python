@@ -34,7 +34,7 @@ class Ranking():
 
         self.font = Font(family="맑은 고딕", size=12, weight="bold")
         self.yearbox = Spinbox(self.frameranking1, font=self.font, width=5, borderwidth=3, relief="ridge",
-                               to=2019, from_=2004)
+                               to=2019, from_=2005)
         self.monthbox = Spinbox(self.frameranking1, font=self.font, width=5, borderwidth=3, relief="ridge",
                                 from_=1, to=12)
         self.daybox = Spinbox(self.frameranking1, font=self.font, width=5, borderwidth=3, relief="ridge",
@@ -89,14 +89,8 @@ class Ranking():
             typename = "dailyboxoffice"
         else:
             typename = "weeklyboxoffice"
-        max = 0
-        for data in self.BoxofficeData.find_all(typename):
-            if max < int(data.rank.string):
-                max = int(data.rank.string)
         for i in range(3):
             for data in self.BoxofficeData.find_all(typename):
-                if i + self.startrank > max:
-                    self.startrank -= max
                 if i + self.startrank == int(data.rank.string):
                     self.rankcanvas[i].create_rectangle(0, 0, 255, 305, fill="light blue")
                     font = Font(size=42, family="Impact", weight="bold", slant="italic", underline=True)
@@ -151,6 +145,7 @@ class Ranking():
                     self.rankcanvas[i].create_text(190, 170, font=("Impact", 16), text=data.salesacc.string)
                     self.rankcanvas[i].create_line(10, 190, 245, 190)
 
+
     def Render(self):
         for i in range(3):
             self.rankframe[i].place(x = (i * 300) + 15, y = 145)
@@ -174,13 +169,14 @@ class Ranking():
 
     def NextRanking(self):
         if not self.BoxofficeData == None:
-            self.startrank += 1
-            self.SetRanking(False)
+            if self.startrank < 8:
+                self.startrank += 1
+                self.SetRanking(False)
     def PrevRanking(self):
         if not self.BoxofficeData == None:
             if self.startrank > 1:
                 self.startrank -= 1
-            self.SetRanking(False)
+                self.SetRanking(False)
 
     def CreateGraph(self):
         if self.BoxofficeData != None:
