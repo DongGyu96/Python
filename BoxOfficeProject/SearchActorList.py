@@ -4,6 +4,7 @@
 
 from tkinter import *
 from ReadData import *
+import ActorInfo
 
 class ActorList():
     def __init__(self, window, width, height):
@@ -26,6 +27,9 @@ class ActorList():
         self.PrevBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="이전 페이지", bd=3, width=9, command=self.Prev)
         self.InfoBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="정보 보기", bd=3, width=9, command=self.Info)
 
+        # 리스트 박스에 들어있는 배우정보
+        self.ActorData = ActorInfo.ActorManager()
+
         self.ListPage = 1
         self.InsertActorList()
 
@@ -35,15 +39,21 @@ class ActorList():
     def InsertActorList(self, page = 1, name = None):
         self.ActorListData = LoadXMLFromFileActorList(self.ListPage, name, None)  # page = 1, name 이랑 movie를 none으로 인자를 넣으면 전체목록을 부름
         i = 0  # 리스트박스는 배열처럼 쓰기 때문에 일종의 인덱스 표현을 위해서
-        find = False
         for data in self.ActorListData.find_all("people"):
             if data.reprolenm.string == "배우":
+                #print(data.peoplecd.string)
                 self.ActorListBox.insert(i, data.peoplenm.string)
+                actor = ActorInfo.Actor(data.peoplecd.string, data.peoplenm.string, data.reprolenm.string)
+                self.ActorData.SetActor(actor)
                 i += 1
+
+        #print(self.ActorData.index)
+        #print(i)
         # 리스트박스에 몇개를 집어넣었는지 알고 있어야 함
 
     def ClearActorList(self):
         self.ActorListBox.delete(0, self.ActorListBox.size() - 1)
+        self.ActorData.Clear()
 
     def Search(self):
         ActorName = self.SearchEntry.get()
@@ -65,7 +75,7 @@ class ActorList():
     def Info(self):
         index = self.ActorListBox.curselection()
         ActorName = self.ActorListBox.get(index)
-        print(ActorName)
+        self.ActorData.FindCodeFromIndex(index[0])
 
 
     def Render(self):
