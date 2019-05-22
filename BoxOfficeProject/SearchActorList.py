@@ -34,6 +34,8 @@ class ActorList():
         self.InsertActorList()
 
         self.InfoFrame = Frame(self.Background, width = self.width / 2, height = self.height, bg = "light blue", bd = 6, relief = "ridge")
+        self.NameLabel = Label(self.InfoFrame, font=("나눔 고딕", 25, "bold"), bg = "light blue")
+
         #self.InfoCanvas = Canvas(self.InfoFrame, width=self.width / 2 - 10, height=500, bd=4, relief="ridge", bg="light blue")
 
     def InsertActorList(self, page = 1, name = None):
@@ -74,8 +76,10 @@ class ActorList():
 
     def Info(self):
         index = self.ActorListBox.curselection()
-        ActorName = self.ActorListBox.get(index)
-        self.ActorData.FindCodeFromIndex(index[0])
+        name = self.ActorData.FindNameFromIndex(index[0])
+        #data = LoadXMLFromFileActorInfo(code)
+        self.NameLabel.configure(text = name)
+        #print(data)
 
 
     def Render(self):
@@ -88,10 +92,14 @@ class ActorList():
         self.SearchBnt.place(x = 355, y = 60)
 
         self.ActorListBox.pack(side = LEFT)
+        #self.ActorListBox.place(x = 0, y = 0)
         self.ActorListScrollbar.pack(side=LEFT, fill="y")
+        #self.ActorListScrollbar.place(x = 340, y = 0)
         self.NextBnt.place(x = 355, y = 10)
         self.PrevBnt.place(x = 355, y = 40)             # 버튼 간격 30씩
         self.InfoBnt.place(x = 355, y = 70)
+
+        self.NameLabel.place(x = 0, y = 0)
         #self.InfoCanvas.place(x = 0, y = 0)
 
     def GetFrame(self):

@@ -73,6 +73,10 @@ class ActorManager():
         print(code)
         return code
 
+    def FindNameFromIndex(self, index):
+        name = self.ActorList[index].GetName()
+        return name
+
 
     def Clear(self):
         self.ActorList.clear()
