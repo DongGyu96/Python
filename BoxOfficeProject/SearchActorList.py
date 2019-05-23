@@ -26,12 +26,20 @@ class ActorList():
         self.NextBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="다음 페이지", bd=3, width=9, command=self.Next)
         self.PrevBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="이전 페이지", bd=3, width=9, command=self.Prev)
         self.InfoBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="정보 보기", bd=3, width=9, command=self.Info)
+        self.BookmarkBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="북마크 보기", bd=3, width=9, command=self.Bookmark)
+        self.AddBookmarkBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="북마크 저장", bd=3, width=9, command=self.AddBookmark)
+        self.SubBookmarkBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="북마크 해제", bd=3, width=9, command=self.SubBookmark)
+
+        # 즐겨 찾기 버튼을 눌러 저장한 배우 목록들
+        self.BookmarkList = []
+        # 북마크 창이 켜져있는지 체크
+        self.BookmarkOn = False
 
         # 리스트 박스에 들어있는 배우정보
         self.ActorData = ActorInfo.ActorManager()
 
         self.ListPage = 1
-        self.InsertActorList()
+        #self.InsertActorList()
 
         self.InfoFrame = Frame(self.Background, width = self.width / 2, height = self.height, bg = "light blue", bd = 6, relief = "ridge")
         self.NameLabel = Label(self.InfoFrame, font=("나눔 고딕", 25, "bold"), bg = "light blue")
@@ -61,6 +69,7 @@ class ActorList():
         ActorName = self.SearchEntry.get()
         self.ClearActorList()
         self.InsertActorList(self.ListPage, ActorName)
+        self.BookmarkOn = False
 
     def Next(self):
         self.ListPage += 1
@@ -81,6 +90,37 @@ class ActorList():
         self.NameLabel.configure(text = name)
         #print(data)
 
+    def Bookmark(self):
+        self.BookmarkOn = True
+        self.ClearActorList()
+        #len = len(self.BookmarkList)
+        #for i in range(len):
+        #    self.ActorListBox.insert(i, self.BookmarkList[i][0])
+
+
+    def AddBookmark(self):
+        index = self.ActorListBox.curselection()
+        if index == ():
+            return
+        code = self.ActorData.FindCodeFromIndex(index[0])
+        name = self.ActorData.FindNameFromIndex(index[0])
+        #print(len(self.BookmarkList))
+        self.BookmarkList.insert(len(self.BookmarkList), [name, code])
+        #print([name, code])
+        #print(self.BookmarkList)
+
+    def SubBookmark(self):
+        if not self.BookmarkOn:
+            return
+        index = self.ActorListBox.curselection()
+        if index == ():
+            return
+        code = self.ActorData.FindCodeFromIndex(index[0])
+        name = self.ActorData.FindNameFromIndex(index[0])
+        # print(len(self.BookmarkList))
+        self.BookmarkList.pop(index[0])
+        # print([name, code])
+        print(self.BookmarkList)
 
     def Render(self):
         self.InfoFrame.pack(side = RIGHT, expand=True)
@@ -98,6 +138,9 @@ class ActorList():
         self.NextBnt.place(x = 355, y = 10)
         self.PrevBnt.place(x = 355, y = 40)             # 버튼 간격 30씩
         self.InfoBnt.place(x = 355, y = 70)
+        self.BookmarkBnt.place(x = 355, y = 100)
+        self.AddBookmarkBnt.place(x = 355, y = 130)
+        self.SubBookmarkBnt.place(x = 355, y = 160)
 
         self.NameLabel.place(x = 0, y = 0)
         #self.InfoCanvas.place(x = 0, y = 0)

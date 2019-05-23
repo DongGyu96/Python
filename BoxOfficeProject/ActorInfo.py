@@ -70,7 +70,6 @@ class ActorManager():
 
     def FindCodeFromIndex(self, index):
         code = self.ActorList[index].GetCode()
-        print(code)
         return code
 
     def FindNameFromIndex(self, index):
