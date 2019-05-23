@@ -1,19 +1,21 @@
 from tkinter import *
+import tkinter.messagebox
 from ReadData import *
 
 class RankingGraph:
     def __init__(self, window, type, Data):
-        self.menubar = Menu(window)
-        self.menu1 = Menu(self.menubar, tearoff=0)
-        self.menu1.add_command(label='하위메뉴 1-1')
-        self.menu1.add_separator()
-        self.menu1.add_command(label='1-2')
-        self.menubar.add_cascade(label='상위메뉴 1', menu=self.menu1)
+        #self.menubar = Menu(window)
+        #self.menu1 = Menu(self.menubar, tearoff=0)
+        #self.menu1.add_command(label='하위메뉴 1-1')
+        #self.menu1.add_separator()
+        #self.menu1.add_command(label='1-2')
+        #self.menubar.add_cascade(label='상위메뉴 1', menu=self.menu1)
 
-        self.GraphFrame = Toplevel(window, menu=self.menubar)
+        #self.GraphFrame = Toplevel(window, menu=self.menubar)
+        self.GraphFrame = Toplevel(window)
         self.GraphFrame.geometry("800x400+800+400")
         self.GraphFrame.resizable(False, False)
-        self.GraphFrame.title("Ranking Graph")
+        self.GraphFrame.title(Data.find("showrange").string + " 박스오피스 랭킹 그래프")
 
         self.Canvas = Canvas(self.GraphFrame, width=800, height=350, background='light blue')
         self.Canvas.create_line(0, 350, 30, 320, width=1)
@@ -40,6 +42,7 @@ class RankingGraph:
                 self.labels.append(Label(self.GraphFrame, font=("HYHeadLine", 11, "bold"), text=str(self.count + 1) + "위", fg = "tan1"))
             else:
                 self.labels.append(Label(self.GraphFrame, font=("HYHeadLine", 11, "bold"), text=str(self.count + 1) + "위",fg="black"))
+            self.labels[self.count].bind("<Button-1>", lambda event = "마우스값", Data = data : ShowMovieName(event, Data))
             self.value.append(Value(data.audicnt.string, data.audiinten.string, data.audiacc.string))
             self.count += 1
 
@@ -89,7 +92,7 @@ class RankingGraph:
                 height = self.value[i].increment / MaxValue.today * 150
             if height < 0:
                 height = height * -1
-                color = "red"
+                color = "orange"
             else:
                 color = "cyan"
             self.Canvas.create_rectangle(60 + (i * 75), 340, 75 + (i * 75), 340 - height, fill=color)
@@ -100,7 +103,21 @@ class RankingGraph:
                                        75 + (i * 75), 340, 75 + (i * 75), 340 - height, fill=color,
                                        outline="black")
 
+        self.Canvas.create_rectangle(685, 0, 800, 105, fill="white", outline = "black", width = 1)
+
+        self.Canvas.create_rectangle(700, 5, 710, 25, fill = "gray")
+        self.Canvas.create_rectangle(700, 30, 710, 50, fill="steel blue3")
+        self.Canvas.create_rectangle(700, 55, 710, 75, fill="steel blue1")
+        self.Canvas.create_rectangle(700, 80, 710, 100, fill="cyan")
+        self.Canvas.create_rectangle(688, 80, 698, 100, fill="orange")
+
+        self.Canvas.create_text(750, 12, font = ("Impact", 8), text = "총 관객수")
+        self.Canvas.create_text(750, 38, font = ("Impact", 8), text="전체 대비 당일")
+        self.Canvas.create_text(750, 65, font = ("Impact", 8), text="당일 관객수")
+        self.Canvas.create_text(750, 90, font = ("Impact", 8), text="당일 대비 전날")
+
         self.Canvas.create_line(0, 2, 800, 2, width=5)
+
         self.RenderGraph()
 
     def RenderGraph(self):
@@ -109,6 +126,15 @@ class RankingGraph:
         for data in self.labels:
             data.place(x = 40 + (i * 75), y = 355)
             i += 1
+
+def ShowMovieName(event, Data):
+    data = Data.rank.string + "위" + "\n"
+    data = data + "영화 제목 :\t" + Data.movienm.string + "\n"
+    data = data + "개봉일 :\t\t" + Data.opendt.string + "\n"
+    data = data + "당일 관람객 :\t" + Data.audicnt.string + "\n"
+    data = data + "전 일/주 대비 :\t" + Data.audiinten.string + "\n"
+    data = data + "총관람객 :\t" + Data.audiacc.string + "\n"
+    tkinter.messagebox.showinfo("영화 정보", data)
 
 class Value:
     def __init__(self, today, prevday, totalday):

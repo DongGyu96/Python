@@ -11,18 +11,19 @@ class Ranking():
         self.Graph = None
         self.startrank = 1
         self.date = 0
-        self.RankingFrame = Frame(window, bd=2, relief="solid")
+        framecolor = "azure"
+        self.RankingFrame = Frame(window, bd=2, relief="solid", background = framecolor)
         self.rankframe = []
         self.rankcanvas = []
         for i in range(3):
             self.rankframe.append(Frame(self.RankingFrame, width=266, height=316,
-                                        bd=4, relief="ridge"))
+                                        bd=4, relief="ridge", background = framecolor))
             self.rankcanvas.append(Canvas(self.RankingFrame, width=250, height=300, bd=2, relief="solid"))
             self.rankcanvas[i].create_rectangle(0, 0, 255, 305, fill="light blue")
-        self.frametitle = Frame(self.RankingFrame, width=400, height=80)
-        self.boxofficelabel = Label(self.frametitle, image=self.boxofficeimage)
+        self.frametitle = Frame(self.RankingFrame, width=400, height=80, background = framecolor)
+        self.boxofficelabel = Label(self.frametitle, image=self.boxofficeimage, bg = framecolor)
 
-        self.frameranking1 = Frame(self.RankingFrame, width=480, height=110)
+        self.frameranking1 = Frame(self.RankingFrame, width=480, height=110, background = framecolor)
 
         self.font = Font(family="맑은 고딕", size=13, weight="bold")
         self.ranktypebox = Listbox(self.frameranking1, font=self.font, width=5, height=2,
@@ -40,15 +41,15 @@ class Ranking():
         self.daybox = Spinbox(self.frameranking1, font=self.font, width=5, borderwidth=3, relief="ridge",
                               from_=1, to=31)
         self.font = Font(family="맑은 고딕", size=15, weight="bold")
-        self.ranktypelabel = Label(self.frameranking1, font=self.font, text="분류")
-        self.yearlabel = Label(self.frameranking1, font=self.font, text="연도")
-        self.monthlabel = Label(self.frameranking1, font=self.font, text="달")
-        self.daylabel = Label(self.frameranking1, font=self.font, text="일")
+        self.ranktypelabel = Label(self.frameranking1, font=self.font, text="분류", bg = framecolor)
+        self.yearlabel = Label(self.frameranking1, font=self.font, text="연도", bg = framecolor)
+        self.monthlabel = Label(self.frameranking1, font=self.font, text="달", bg = framecolor)
+        self.daylabel = Label(self.frameranking1, font=self.font, text="일", bg = framecolor)
 
         self.setrankbutton = Button(self.frameranking1, font=self.font, text="갱신",
                                     command=lambda set=True: self.SetRanking(set))
         # command = lambda index = i: func(index)
-        self.datelabel = Label(self.frameranking1, font=self.font, text=" ")
+        self.datelabel = Label(self.frameranking1, font=self.font, text=" ", bg = framecolor)
         self.nextrankingbutton = Button(self.frameranking1, font=("consolas ", 10, "bold"), text="다음 페이지",
                                         command=self.NextRanking)
         self.prevrankingbutton = Button(self.frameranking1, font=("consolas", 10, "bold"), text="이전 페이지",
@@ -80,7 +81,7 @@ class Ranking():
             date = date + self.BoxofficeData.showrange.string[8:9] + " " + self.BoxofficeData.showrange.string[9:13] + "년" + \
                    self.BoxofficeData.showrange.string[13:15] + "월" + self.BoxofficeData.showrange.string[15:] + "일"
 
-        self.datelabel = Label(self.RankingFrame, font = ("Bernard MT", 22, "bold"), text = date)
+        self.datelabel = Label(self.RankingFrame, font = ("Bernard MT", 22, "bold"), text = date, bg = "azure")
         self.RenderRanking()
         self.Render()
 
