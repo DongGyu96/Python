@@ -74,6 +74,9 @@ class MovieList():
     def Search(self):
         self.moviename = self.searchmovie.get() # 찾으려는 이름을 Entry에서 얻어옴
         self.movielistpage = 1
+        if self.moviename != "":
+            self.setpage.delete(0, len(self.setpage.get()))
+            self.setpage.insert(0, str(self.movielistpage))
         self.ResetMovieList() # 리스트 박스 리셋
 
     def Info(self):
