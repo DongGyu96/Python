@@ -85,14 +85,21 @@ class ActorList():
 
     def Info(self):
         index = self.ActorListBox.curselection()
-        name = self.ActorData.FindNameFromIndex(index[0])
+        if index == ():
+            return
+        print(self.ActorListBox.get(index[0]))
+
+        #name = self.ActorData.FindNameFromIndex(index[0])
         #data = LoadXMLFromFileActorInfo(code)
-        self.NameLabel.configure(text = name)
+        #self.NameLabel.configure(text = name)
         #print(data)
 
     def Bookmark(self):
         self.BookmarkOn = True
         self.ClearActorList()
+        for i in range(len(self.BookmarkList)):
+            self.ActorListBox.insert(i,self.BookmarkList[i][0])
+
         #len = len(self.BookmarkList)
         #for i in range(len):
         #    self.ActorListBox.insert(i, self.BookmarkList[i][0])
@@ -115,12 +122,8 @@ class ActorList():
         index = self.ActorListBox.curselection()
         if index == ():
             return
-        code = self.ActorData.FindCodeFromIndex(index[0])
-        name = self.ActorData.FindNameFromIndex(index[0])
-        # print(len(self.BookmarkList))
         self.BookmarkList.pop(index[0])
-        # print([name, code])
-        print(self.BookmarkList)
+        self.Bookmark()
 
     def Render(self):
         self.InfoFrame.pack(side = RIGHT, expand=True)
