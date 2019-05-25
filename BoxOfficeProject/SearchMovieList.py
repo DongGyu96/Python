@@ -257,14 +257,16 @@ class MovieList():
         i = 0
         find = False
         for data in self.MovieListData.find_all("movie"):
-            for word in Filter:
-                if word in data.movienm.string:
-                    find = True
-                    break
-            if find == False:
-                self.movielistbox.insert(i, data.movienm.string)
-                i += 1
-            find = False
+            if data.repgenrenm.string != None:
+                if not "성인물" in data.repgenrenm.string:
+                    for word in Filter:
+                        if word in data.movienm.string:
+                            find = True
+                            break
+                    if find == False:
+                        self.movielistbox.insert(i, data.movienm.string)
+                        i += 1
+                    find = False
         self.movielistsize = i
 
     def Render(self):
