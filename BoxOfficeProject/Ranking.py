@@ -125,10 +125,17 @@ class Ranking():
                     # ===개봉일==========================================================================
                     #self.rankcanvas[i].create_line(10, 100, 245, 100)
                     self.rankcanvas[i].create_line(0, 100, 300, 100, width=3)
-                    self.rankcanvas[i].create_text(30, 210, font=("HYHeadLine", 14, "bold"), text="당일")
+                    if self.boxofficetype == DAILY:
+                        self.rankcanvas[i].create_text(30, 210, font=("HYHeadLine", 14, "bold"), text="당일")
+                    else:
+                        self.rankcanvas[i].create_text(40, 210, font=("HYHeadLine", 14, "bold"), text="이번주")
                     self.rankcanvas[i].create_text(200, 210, font=("Impact", 14), text="+" + data.audicnt.string,
                                                    fill="steel blue")
-                    self.rankcanvas[i].create_text(50, 235, font=("HYHeadLine", 14, "bold"), text="전일 대비")
+                    if self.boxofficetype == DAILY:
+                        self.rankcanvas[i].create_text(50, 235, font=("HYHeadLine", 14, "bold"), text="전일 대비")
+                    else:
+                        self.rankcanvas[i].create_text(50, 235, font=("HYHeadLine", 14, "bold"), text="전주 대비")
+
                     if int(data.audiinten.string) < 0:
                         self.rankcanvas[i].create_text(200, 235, font=("Impact", 14), text=data.audiinten.string,
                                                        fill="red")
@@ -139,10 +146,17 @@ class Ranking():
                     self.rankcanvas[i].create_text(200, 260, font=("Impact", 16), text=data.audiacc.string)
                     self.rankcanvas[i].create_line(10, 280, 245, 280)
                     # ===관객수===========================================================================
-                    self.rankcanvas[i].create_text(30, 120, font=("HYHeadLine", 14, "bold"), text="당일")
+                    if self.boxofficetype == DAILY:
+                        self.rankcanvas[i].create_text(30, 120, font=("HYHeadLine", 14, "bold"), text="당일")
+                    else:
+                        self.rankcanvas[i].create_text(40, 120, font=("HYHeadLine", 14, "bold"), text="이번주")
                     self.rankcanvas[i].create_text(190, 120, font=("Impact", 14), text="+" + data.salesamt.string,
                                                    fill="steel blue")
-                    self.rankcanvas[i].create_text(50, 145, font=("HYHeadLine", 14, "bold"), text="전일 대비")
+                    if self.boxofficetype == DAILY:
+                        self.rankcanvas[i].create_text(50, 145, font=("HYHeadLine", 14, "bold"), text="전일 대비")
+                    else:
+                        self.rankcanvas[i].create_text(50, 145, font=("HYHeadLine", 14, "bold"), text="전주 대비")
+
                     if int(data.salesinten.string) < 0:
                         self.rankcanvas[i].create_text(190, 145, font=("Impact", 14), text=data.salesinten.string,
                                                        fill="red")
