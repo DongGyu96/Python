@@ -16,6 +16,8 @@ import urllib.request
 from PIL import Image,ImageTk
 import webbrowser
 
+import socket
+
 DAILY = (0,)
 WEEKLY = (1,)
 
@@ -204,12 +206,37 @@ def OpenWebBrowser(url):
 # command로 인자받는법 : 람다함수 사용
 # command = lambda index = i: func(index)
 
+
+def LoadGoogleAPIMapToURL(lat, lon):
+    url = "https://maps.googleapis.com/maps/api/" \
+    "staticmap?" \
+    "?zoom=13" \
+    "&size=600x300" \
+    "&maptype=roadmap" \
+    "&markers=color:blue%7Clabel:G%7C" + str(lat) + "," + str(lon) + "" \
+    "&key=AIzaSyCYpTRneF3xvsbc37jgxbFk5e1AfDAJ8jo"
+    print(url)
+    raw_data = urllib.request.urlopen(url).read()
+    im = Image.open(BytesIO(raw_data))
+    data = ImageTk.PhotoImage(im)
+    return data
+#"&markers=color:green%7Clabel:G%7C40.711614,-74.012318" \
+#"&markers=color:red%7Clabel:C%7C40.718217,-73.998284" \
+
+#AIzaSyCYpTRneF3xvsbc37jgxbFk5e1AfDAJ8jo
+
 if __name__ == '__main__': # ReadData.py를 실행시킬때만 실행되는 내용
-    #ip = geocoder.ipinfo('me').ip
+    #ip = geocoder.ip('me').ip
+    #print(ip)
     #url = 'http://ip-api.com/json/' + ip
     #recvd = requests.get(url)
     #loc = json.loads(recvd.text)
+    #print(loc)
     #print(loc["lat"])
+    #print(loc["lon"])
+
+    url = "https://maps.googleapis.com/maps/api/geocode/xml?components=country:KR&key=AIzaSyCYpTRneF3xvsbc37jgxbFk5e1AfDAJ8jo"
+    print(urllib.request.urlopen(url).read())
 
     #Data = LoadXMLFromFileBoxOffice(DAILY, "20190518")
     #print(Data)
@@ -219,12 +246,23 @@ if __name__ == '__main__': # ReadData.py를 실행시킬때만 실행되는 내�
     #    print(data['director'].split("|")[0])
     #print(Data['items'])
 
-    Data = LoadNaverAPIToNews("박보영")
+    #Data = LoadNaverAPIToNews("박보영")
     #image = []
-    print(Data)
+    #print(Data)
     #for data in Data['items']:
     #    print(data['link'])
     #    image.append(LoadImageFromURL1(data['link'], 165, 235))
     #    # link의 이미지가 너무 크면 thumbnail 로 썸네일 이미지로 가져올수도 있음
+    window = Tk()
+    window.geometry("900x600")
+
+    testimage = LoadGoogleAPIMapToURL(35.100697, 129.019798)
+    #testimage = LoadGoogleAPIMapToURL(loc["lat"], loc["lon"])
+    label = Label(window, image = testimage)
+    label.pack()
+
+
+
+    window.mainloop()
 else:
     pass
