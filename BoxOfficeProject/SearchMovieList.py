@@ -10,30 +10,32 @@ class MovieList():
         self.height = height
 
         self.noImage = PhotoImage(file = 'image/NoImage.png')
-
+        temp = 'light blue'
         #bd = 두깨 크기
         #relief = 외곽선 설정
         #background = 배경색
         #font = (글꼴 크기 스타일(볼드 기울임 등))
         #글씨 색바꾸는건 canvas_create.text에서만 가능한듯
         #이미지 혹은 캔버스만드려서 텍스트띄우는방법
-        self.SearchFrame = Frame(window, bd=2, relief="solid", background="light blue")
+        self.SearchFrame = Frame(window, bd=2, relief="solid", background=temp)
         self.framesearch1 = Frame(self.SearchFrame, width=self.width / 2, height=100, bd=0, relief="solid",
-                                  background="light blue")
+                                  background= temp)
         self.framesearch2 = Frame(self.SearchFrame, width=self.width / 2, height=self.height, bd=0, relief="solid",
-                                  background="light blue")
+                                  background= temp)
         self.framemovielist = Frame(self.SearchFrame, width=330, height=350, background="white")
         self.movielistscrollbar = Scrollbar(self.framemovielist)
-        self.movielistbox = Listbox(self.framemovielist, width=46, height=22, bd=6, relief="ridge",
+        self.movielistbox = Listbox(self.framemovielist, width=21, height=22, bd=6, relief="sunken",
+                                    font = ("HYHeadLine", 20, "bold"),
                                     yscrollcommand=self.movielistscrollbar.set, bg = "azure",
-                                    selectbackground = "orange", selectforeground = "black", selectborderwidth = 2)
+                                    selectbackground = "orange", selectforeground = "black", selectborderwidth = 2,
+                                    borderwidth = 4, fg = "black", highlightbackground = "gray",highlightthickness = 2)
         self.movielistscrollbar["command"] = self.movielistbox.yview
         self.movieinfocanvas = Canvas(self.framesearch2, width=self.width / 2 - 10, height=500, bd=4, relief="ridge",
                                       background="light blue")
         self.movieinfocanvas.bind("<Button-1>", self.Click)
         self.find = False
 
-        self.SearchFrameLabel = Label(self.framesearch1, font=("Impact", 25, "bold"), text="영화 상세 정보", bg = "light blue")
+        self.SearchFrameLabel = Label(self.framesearch1, font=("Impact", 25, "bold"), text="영화 상세 정보", bg = temp)
 
         self.searchmovie = Entry(self.framesearch1, font=("HYHeadLine", 15, "bold"), width=31, bd=6, relief="ridge", bg = "azure")
         self.searchmoviebutton = Button(self.SearchFrame, font=("HYHeadLine", 14, "bold"), text="검색", width=6,
@@ -47,9 +49,9 @@ class MovieList():
 
         self.resetbutton = Button(self.SearchFrame, font = ("HYHeadLine", 10, "bold"), text = "초기화", bd = 3,
                                   width = 9, command = self.Reset)
-        self.setpage = Entry(self.SearchFrame, font=("HYHeadLine", 15, "bold"), width=7, bg = "light blue")
+        self.setpage = Entry(self.SearchFrame, font=("HYHeadLine", 15, "bold"), width=7, bg = temp)
         self.setpage.insert(0, str(self.movielistpage))
-        self.pagelabel = Label(self.SearchFrame, font =("HYHeadLine", 15, "bold"), text = "[Page]", bg = "light blue")
+        self.pagelabel = Label(self.SearchFrame, font =("HYHeadLine", 15, "bold"), text = "[Page]", bg = temp)
         #영화 목록 호출
         self.MovieListData = LoadXMLFromFileMovieList(self.movielistpage, self.moviename)
 
