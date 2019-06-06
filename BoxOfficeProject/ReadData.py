@@ -16,6 +16,8 @@ import urllib.request
 from PIL import Image,ImageTk
 import webbrowser
 
+import socket
+
 DAILY = (0,)
 WEEKLY = (1,)
 
@@ -204,27 +206,77 @@ def OpenWebBrowser(url):
 # command로 인자받는법 : 람다함수 사용
 # command = lambda index = i: func(index)
 
+
+def LoadGoogleAPIMapToURL(lat, lon):
+    url = "https://maps.googleapis.com/maps/api/" \
+    "staticmap?" \
+    "?zoom=13" \
+    "&size=600x300" \
+    "&maptype=roadmap" \
+    "&markers=color:blue%7Clabel:G%7C" + str(lat) + "," + str(lon) + "" \
+    "&key=AIzaSyCYpTRneF3xvsbc37jgxbFk5e1AfDAJ8jo"
+    print(url)
+    raw_data = urllib.request.urlopen(url).read()
+    im = Image.open(BytesIO(raw_data))
+    data = ImageTk.PhotoImage(im)
+    return data
+#"&markers=color:green%7Clabel:G%7C40.711614,-74.012318" \
+#"&markers=color:red%7Clabel:C%7C40.718217,-73.998284" \
+
+#AIzaSyCYpTRneF3xvsbc37jgxbFk5e1AfDAJ8jo
+
+def LoadNaverAPIToTest(name):
+    client_id = "CauJEcypbFDul3iDdw3V"
+    client_secret = "1gsH15h8bj"
+    encText = urllib.parse.quote(name)
+    url = "https://openapi.naver.com/v1/search/webkr.json?query=" + encText  # json 결과
+    # url = "https://openapi.naver.com/v1/search/movie.xml?query=" + encText # xml 결과
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id", client_id)
+    request.add_header("X-Naver-Client-Secret", client_secret)
+    response = urllib.request.urlopen(request)
+    rescode = response.getcode()
+    if (rescode == 200):
+        response_body = response.read()
+        # print(response_body.decode('utf-8'))
+        return json.loads(response_body.decode('utf-8'))
+    else:
+        print("Error Code:" + rescode)
+        return None
+
 if __name__ == '__main__': # ReadData.py를 실행시킬때만 실행되는 내용
-    #ip = geocoder.ipinfo('me').ip
-    #url = 'http://ip-api.com/json/' + ip
-    #recvd = requests.get(url)
-    #loc = json.loads(recvd.text)
-    #print(loc["lat"])
+    # ip = geocoder.ip('me').ip
+    # url = 'http://ip-api.com/json/' + ip
+    # recvd = requests.get(url)
+    # loc = json.loads(recvd.text)
+    # print(loc)
+    # print(loc["lat"])
+    # print(loc["lon"])
 
-    #Data = LoadXMLFromFileBoxOffice(DAILY, "20190518")
-    #print(Data)
+    # Data = LoadXMLFromFileBoxOffice(DAILY, "20190518")
+    # print(Data)
 
-    #Data = LoadNaverAPIToMovie("터치")
-    #for data in Data['items']:
+    # Data = LoadNaverAPIToMovie("터치")
+    # for data in Data['items']:
     #    print(data['director'].split("|")[0])
-    #print(Data['items'])
+    # print(Data['items'])
 
-    Data = LoadNaverAPIToNews("박보영")
-    #image = []
-    print(Data)
-    #for data in Data['items']:
+    # Data = LoadNaverAPIToNews("박보영")
+    # image = []
+    # print(Data)
+    # for data in Data['items']:
     #    print(data['link'])
     #    image.append(LoadImageFromURL1(data['link'], 165, 235))
     #    # link의 이미지가 너무 크면 thumbnail 로 썸네일 이미지로 가져올수도 있음
+    url1 = "http://www.lottecinema.co.kr/LCHS/Contents/Cinema/Cinema-Detail.aspx?divisionCode=1&detailDivisionCode=1&cinemaID=1018"
+    url2 = "http://www.cgv.co.kr/theaters/?theaterCode=0056"
+    data = urllib.request.urlopen(url2).read()
+    Data = BeautifulSoup(data, "html.parser")
+    print(Data)
+
+    print(LoadNaverAPIToTest("CGV 강남"))
+
+    path = "C:\Python37\Lib\site-packages\selenium\webdriver"
+    driver = webdriver.Chrome(path)
 else:
     pass
