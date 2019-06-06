@@ -34,13 +34,10 @@ class ActorList():
         self.BookmarkList = []
         # 북마크 창이 켜져있는지 체크
         self.BookmarkOn = False
-
         # 리스트 박스에 들어있는 배우정보
         self.ActorData = ActorInfo.ActorManager()
 
         self.ListPage = 1
-        #self.InsertActorList()
-
         self.InfoFrame = Frame(self.Background, width = self.width / 2, height = self.height, bg = "light blue", bd = 6, relief = "ridge")
         self.NameLabel = Label(self.InfoFrame, font=("나눔 고딕", 25, "bold"), bg = "light blue")
 
@@ -51,15 +48,10 @@ class ActorList():
         i = 0  # 리스트박스는 배열처럼 쓰기 때문에 일종의 인덱스 표현을 위해서
         for data in self.ActorListData.find_all("people"):
             if data.reprolenm.string == "배우":
-                #print(data.peoplecd.string)
                 self.ActorListBox.insert(i, data.peoplenm.string)
                 actor = ActorInfo.Actor(data.peoplecd.string, data.peoplenm.string, data.reprolenm.string)
                 self.ActorData.SetActor(actor)
                 i += 1
-
-        #print(self.ActorData.index)
-        #print(i)
-        # 리스트박스에 몇개를 집어넣었는지 알고 있어야 함
 
     def ClearActorList(self):
         self.ActorListBox.delete(0, self.ActorListBox.size() - 1)
@@ -70,13 +62,19 @@ class ActorList():
         self.ClearActorList()
         self.InsertActorList(self.ListPage, ActorName)
         self.BookmarkOn = False
+        LoadNaverAPIToImage("공유 배우")
+
 
     def Next(self):
+        if self.BookmarkOn:
+            return
         self.ListPage += 1
         self.ClearActorList()
         self.InsertActorList(self.ListPage)
 
     def Prev(self):
+        if self.BookmarkOn:
+            return
         if self.ListPage == 1:
             return
         self.ListPage -= 1
@@ -87,12 +85,8 @@ class ActorList():
         index = self.ActorListBox.curselection()
         if index == ():
             return
-        print(self.ActorListBox.get(index[0]))
-
-        #name = self.ActorData.FindNameFromIndex(index[0])
-        #data = LoadXMLFromFileActorInfo(code)
-        #self.NameLabel.configure(text = name)
-        #print(data)
+        name = self.ActorListBox.get(index[0])
+        self.NameLabel.configure(text = name)
 
     def Bookmark(self):
         self.BookmarkOn = True
@@ -100,21 +94,15 @@ class ActorList():
         for i in range(len(self.BookmarkList)):
             self.ActorListBox.insert(i,self.BookmarkList[i][0])
 
-        #len = len(self.BookmarkList)
-        #for i in range(len):
-        #    self.ActorListBox.insert(i, self.BookmarkList[i][0])
-
-
     def AddBookmark(self):
+        if self.BookmarkOn:
+            return
         index = self.ActorListBox.curselection()
         if index == ():
             return
         code = self.ActorData.FindCodeFromIndex(index[0])
         name = self.ActorData.FindNameFromIndex(index[0])
-        #print(len(self.BookmarkList))
         self.BookmarkList.insert(len(self.BookmarkList), [name, code])
-        #print([name, code])
-        #print(self.BookmarkList)
 
     def SubBookmark(self):
         if not self.BookmarkOn:
