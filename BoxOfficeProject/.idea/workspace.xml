@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="632fc092-d07f-4302-8a12-5246fa225b79" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ActorInfo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SearchActorList.py" beforeDir="false" afterPath="$PROJECT_DIR$/SearchActorList.py" afterDir="false" />
     </list>
@@ -20,8 +19,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SearchMovieList.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="271" column="30" lean-forward="true" selection-start-line="271" selection-start-column="30" selection-end-line="271" selection-end-column="30" />
+            <state relative-caret-position="81">
+              <caret line="126" column="60" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="60" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -32,8 +31,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SearchTheater.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="13" column="32" lean-forward="true" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+            <state relative-caret-position="351">
+              <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -44,17 +43,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ReadData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="261" column="26" lean-forward="true" selection-start-line="261" selection-start-column="26" selection-end-line="261" selection-end-column="26" />
+            <state relative-caret-position="262">
+              <caret line="251" column="16" lean-forward="true" selection-start-line="251" selection-start-column="16" selection-end-line="251" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SearchActorList.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1710">
-              <caret line="92" column="23" selection-start-line="92" selection-start-column="23" selection-end-line="92" selection-end-column="23" />
+            <state relative-caret-position="356">
+              <caret line="144" column="35" lean-forward="true" selection-start-line="144" selection-start-column="35" selection-end-line="144" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -62,7 +61,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ActorInfo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1349">
+            <state relative-caret-position="1917">
               <caret line="71" column="46" selection-start-line="71" selection-start-column="46" selection-end-line="71" selection-end-column="46" />
             </state>
           </provider>
@@ -71,7 +70,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Launcher.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
+            <state relative-caret-position="351">
               <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -80,14 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Interface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="290">
+              <caret line="19" column="74" selection-start-line="19" selection-start-column="74" selection-end-line="19" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -95,7 +91,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Ranking.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2109">
+            <state relative-caret-position="2997">
               <caret line="114" column="25" selection-start-line="114" selection-start-column="25" selection-end-line="114" selection-end-column="25" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -107,7 +103,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RankingGraph.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
+            <state relative-caret-position="1080">
               <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -130,6 +126,7 @@
       <find>LoadXMLFromFileActorList</find>
       <find>movielistpage</find>
       <find>이전</find>
+      <find>image</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -144,20 +141,19 @@
         <option value="$PROJECT_DIR$/Launcher.py" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/ActorInfo.py" />
-        <option value="$PROJECT_DIR$/SearchActorList.py" />
         <option value="$PROJECT_DIR$/RankingGraph.py" />
         <option value="$PROJECT_DIR$/Ranking.py" />
-        <option value="$PROJECT_DIR$/ReadData.py" />
         <option value="$PROJECT_DIR$/SearchMovieList.py" />
         <option value="$PROJECT_DIR$/SearchTheater.py" />
         <option value="$PROJECT_DIR$/Interface.py" />
+        <option value="$PROJECT_DIR$/ReadData.py" />
+        <option value="$PROJECT_DIR$/SearchActorList.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-52" />
-    <option name="y" value="43" />
-    <option name="width" value="1532" />
+    <option name="x" value="-7" />
+    <option name="width" value="1139" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
@@ -165,6 +161,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -176,13 +173,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="E:/BoxOfficeProject" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -201,7 +197,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Launcher">
+  <component name="RunManager" selected="Python.SearchActorList">
     <configuration name="ActorInfo" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BoxOfficeProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -227,6 +223,9 @@
       <module name="BoxOfficeProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -335,9 +334,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.SearchActorList" />
         <item itemvalue="Python.ReadData" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.SearchActorList" />
         <item itemvalue="Python.ActorInfo" />
         <item itemvalue="Python.SearchMovieList" />
       </list>
@@ -367,9 +366,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989154" visible="true" weight="0.15542677" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989154" visible="true" weight="0.15884861" />
       <window_info id="Structure" order="1" sideWeight="0.5010846" side_tool="true" weight="0.15542677" />
       <window_info id="Favorites" order="2" sideWeight="0.5010846" side_tool="true" weight="0.15542677" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -401,7 +399,7 @@
     <entry file="file://$USER_HOME$/Downloads/위키북스 빠르게 활용한는 파이썬 3.2 프로그래밍 python32-master/python32-master/2부 모듈/2부16장/book.py" />
     <entry file="file://$PROJECT_DIR$/Ranking.png" />
     <entry file="file://$PROJECT_DIR$/boxoffice1.png" />
-    <entry file="file://C:/Python37/Lib/urllib/request.py" />
+    <entry file="file://C:/python37/Lib/urllib/request.py" />
     <entry file="file://$PROJECT_DIR$/Setting.png" />
     <entry file="file://$PROJECT_DIR$/Search.png" />
     <entry file="file://$USER_HOME$/Anaconda3/Lib/ntpath.py" />
@@ -412,25 +410,18 @@
     <entry file="file://$PROJECT_DIR$/MovieList.xml" />
     <entry file="file://$PROJECT_DIR$/MoveList.xml" />
     <entry file="file://$PROJECT_DIR$/MoveInfo.xml" />
-    <entry file="file://C:/Python37/Lib/tkinter/__init__.py" />
+    <entry file="file://C:/python37/Lib/tkinter/__init__.py" />
     <entry file="file://$PROJECT_DIR$/test.py" />
-    <entry file="file://$PROJECT_DIR$/SearchActorList.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1710">
-          <caret line="92" column="23" selection-start-line="92" selection-start-column="23" selection-end-line="92" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ActorInfo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1349">
+        <state relative-caret-position="1917">
           <caret line="71" column="46" selection-start-line="71" selection-start-column="46" selection-end-line="71" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Launcher.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
+        <state relative-caret-position="351">
           <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
@@ -440,7 +431,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Ranking.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2109">
+        <state relative-caret-position="2997">
           <caret line="114" column="25" selection-start-line="114" selection-start-column="25" selection-end-line="114" selection-end-column="25" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
@@ -450,35 +441,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RankingGraph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
+        <state relative-caret-position="1080">
           <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ReadData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="261" column="26" lean-forward="true" selection-start-line="261" selection-start-column="26" selection-end-line="261" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SearchMovieList.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="271" column="30" lean-forward="true" selection-start-line="271" selection-start-column="30" selection-end-line="271" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SearchTheater.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="32" lean-forward="true" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -487,11 +451,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Interface.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        <state relative-caret-position="290">
+          <caret line="19" column="74" selection-start-line="19" selection-start-column="74" selection-end-line="19" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SearchTheater.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SearchMovieList.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="126" column="60" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ReadData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="251" column="16" lean-forward="true" selection-start-line="251" selection-start-column="16" selection-end-line="251" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SearchActorList.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="144" column="35" lean-forward="true" selection-start-line="144" selection-start-column="35" selection-end-line="144" selection-end-column="35" />
         </state>
       </provider>
     </entry>

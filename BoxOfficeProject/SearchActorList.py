@@ -138,3 +138,20 @@ class ActorList():
 
     def GetFrame(self):
         return self.Background
+
+
+
+if __name__ == '__main__': # ReadData.py를 실행시킬때만 실행되는 내용
+    img = LoadNaverAPIToImage("공유")
+    profile = img['items']
+    print(profile)
+    print(profile[0]['link'])
+    window = Tk()
+    image = []
+    for data in profile:
+        image.append(LoadImageFromURL(profile[0]['link'], 500, 200))
+    label = Label(window, image = image[0])
+    label.pack()
+    window.mainloop()
+
+
