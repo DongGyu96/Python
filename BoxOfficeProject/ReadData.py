@@ -29,9 +29,10 @@ THEATERlastdate = 18
 THEATERstate = 6
 THEATERcall = 10
 THEATERaddress = 13
+THEATERprevaddress = 12
 THEATERx = 19
 THEATERy = 20
-THEATERtype = 21
+THEATERtype = 22
 
 
 def LoadXMLFromFileBoxOffice(type, date):
