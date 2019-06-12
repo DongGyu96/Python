@@ -17,11 +17,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret line="53" column="22" lean-forward="true" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
+                <state relative-caret-position="1297">
+                  <caret line="66" column="49" selection-start-line="66" selection-start-column="49" selection-end-line="66" selection-end-column="49" />
                 </state>
               </provider>
             </entry>
@@ -29,17 +29,17 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ActorInfo.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="71" column="29" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="29" />
+                <state relative-caret-position="630">
+                  <caret line="107" column="1" selection-start-line="107" selection-start-column="1" selection-end-line="107" selection-end-column="1" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ReadData.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="183">
-                  <caret line="154" column="17" selection-start-line="154" selection-start-column="17" selection-end-line="154" selection-end-column="17" />
+                <state relative-caret-position="-97">
+                  <caret line="183" column="22" selection-start-line="183" selection-start-column="4" selection-end-line="183" selection-end-column="22" />
                 </state>
               </provider>
             </entry>
@@ -47,8 +47,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchMovieList.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2552">
-                  <caret line="90" column="61" selection-start-line="90" selection-start-column="61" selection-end-line="90" selection-end-column="61" />
+                <state relative-caret-position="4706">
+                  <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
                   <folding>
                     <element signature="e#0#21#0" expanded="true" />
                   </folding>
@@ -59,15 +59,12 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchMovieList.py">
+            <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ReadData.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2436">
-                  <caret line="102" column="17" selection-start-line="102" selection-start-column="12" selection-end-line="102" selection-end-column="17" />
-                  <folding>
-                    <element signature="e#0#21#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="-406">
+                  <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
                 </state>
               </provider>
             </entry>
@@ -81,6 +78,14 @@
       <find>yscrollcommand</find>
       <find>search</find>
       <find>def se</find>
+      <find>result_profile</find>
+      <find>ssl.naver.</find>
+      <find>class=</find>
+      <find>result_content</find>
+      <find>nocr href</find>
+      <find>div class=&quot;people_info</find>
+      <find>div class=&quot;big_thumb</find>
+      <find>Load</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -91,14 +96,15 @@
       <list>
         <option value="$PROJECT_DIR$/TicTacToe/main.py" />
         <option value="$PROJECT_DIR$/BoxOfficeProject/Launcher.py" />
-        <option value="$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py" />
         <option value="$PROJECT_DIR$/BoxOfficeProject/ReadData.py" />
+        <option value="$PROJECT_DIR$/BoxOfficeProject/ActorInfo.py" />
+        <option value="$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="283" />
-    <option name="y" value="-10" />
+    <option name="x" value="2619" />
+    <option name="y" value="-25" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -134,7 +140,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -149,6 +155,27 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.Launcher">
+    <configuration name="ActorInfo" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BoxOfficeProject" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BoxOfficeProject/ActorInfo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Launcher" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -162,6 +189,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BoxOfficeProject/Launcher.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SearchActorList" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BoxOfficeProject" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -194,6 +242,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.Launcher" />
+        <item itemvalue="Python.SearchActorList" />
+        <item itemvalue="Python.ActorInfo" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
@@ -221,21 +271,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="1912" y="-8" width="2576" height="1456" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15072933" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.15559158" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4986494" weight="0.2888889" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6596434" weight="0.3873016" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49972987" weight="0.3288889" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49972987" weight="0.3288889" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49972987" weight="0.3288889" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50135064" side_tool="true" visible="true" weight="0.2888889" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.34035656" side_tool="true" weight="0.42222223" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49918962" weight="0.3288889" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -249,8 +299,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/BoxOfficeProject/SearchMovieList.py</url>
-          <line>103</line>
+          <line>105</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BoxOfficeProject/ReadData.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -304,10 +359,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ReadData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-97">
+          <caret line="183" column="22" selection-start-line="183" selection-start-column="4" selection-end-line="183" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchMovieList.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2552">
-          <caret line="90" column="61" selection-start-line="90" selection-start-column="61" selection-end-line="90" selection-end-column="61" />
+        <state relative-caret-position="4706">
+          <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -316,22 +378,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ActorInfo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="71" column="29" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="29" />
+        <state relative-caret-position="630">
+          <caret line="107" column="1" selection-start-line="107" selection-start-column="1" selection-end-line="107" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="53" column="22" lean-forward="true" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ReadData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="154" column="17" selection-start-line="154" selection-start-column="17" selection-end-line="154" selection-end-column="17" />
+        <state relative-caret-position="1297">
+          <caret line="66" column="49" selection-start-line="66" selection-start-column="49" selection-end-line="66" selection-end-column="49" />
         </state>
       </provider>
     </entry>

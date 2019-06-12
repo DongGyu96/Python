@@ -80,3 +80,31 @@ class ActorManager():
     def Clear(self):
         self.ActorList.clear()
         self.index = 0
+
+#import urllib.request as req
+#import urllib.parse
+#import json
+#import urllib.request
+
+#encText = urllib.parse.quote("강호동배우")
+#url ="https://people.search.naver.com/search.naver?sm=tab_hty&where=nexearch&query="+ encText + "&ie=utf8&x=0&y=0"
+#request = urllib.request.Request(url)
+#print(url)
+#response = urllib.request.urlopen(request)
+#rescode = response.getcode()
+#if rescode == 200:
+#    response_body = response.read()
+#    print(response_body)
+
+#import requests
+#from bs4 import  BeautifulSoup
+import urllib.parse
+#encText = urllib.parse.quote("공유")
+#url ="https://people.search.naver.com/search.naver?sm=tab_hty&where=nexearch&query="+ encText + "&ie=utf8&x=0&y=0"
+#url = "https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=" + "공유"
+#print(url)
+#response = requests.get(url)
+#print(response)
+#result = BeautifulSoup(response.text, 'html.parser')
+#print(response.text)
+#result.find_all('div', 'class':'result_profile'')
