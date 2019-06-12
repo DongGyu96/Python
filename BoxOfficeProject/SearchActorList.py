@@ -5,6 +5,9 @@
 from tkinter import *
 from ReadData import *
 import ActorInfo
+import requests
+import urllib.parse
+from bs4 import BeautifulSoup
 
 class ActorList():
     def __init__(self, window, width, height):
@@ -14,7 +17,7 @@ class ActorList():
 
         self.Background = Frame(window, bd=2, relief="solid", background="light blue")
 
-        self.SearchFrame = Frame(self.Background, width = self.width / 2, height = 100, bg = "light blue")
+        self.SearchFrame = Frame(self.Background, width = self.width, height = 70, bg = "light blue")
         self.SearchFrameLabel = Label(self.SearchFrame, font=("나눔 고딕", 25, "bold"), text="배우 상세 정보", bg = "light blue")
         self.SearchEntry = Entry(self.SearchFrame, width = 31, font=("HYHeadLine", 15, "bold"), bd = 6, relief = "ridge")
         self.SearchBnt = Button(self.SearchFrame, text = "검색",   font=("나눔 고딕", 14, "bold"), width = 6, bd = 3, command = self.Search)
@@ -38,7 +41,10 @@ class ActorList():
         self.ActorData = ActorInfo.ActorManager()
 
         self.ListPage = 1
-        self.InfoFrame = Frame(self.Background, width = self.width / 2, height = self.height, bg = "light blue", bd = 6, relief = "ridge")
+        self.InfoFrame = Frame(self.Background, width = self.width / 2, height = 470, bg = "light blue", bd = 6, relief = "ridge")
+
+
+        self.ActorLabel = Label(self.InfoFrame, bg = "light blue")
         self.NameLabel = Label(self.InfoFrame, font=("나눔 고딕", 25, "bold"), bg = "light blue")
 
         #self.InfoCanvas = Canvas(self.InfoFrame, width=self.width / 2 - 10, height=500, bd=4, relief="ridge", bg="light blue")
@@ -59,11 +65,19 @@ class ActorList():
 
     def Search(self):
         ActorName = self.SearchEntry.get()
+        if ActorName == "":
+            return
         self.ClearActorList()
         self.InsertActorList(self.ListPage, ActorName)
         self.BookmarkOn = False
-        LoadNaverAPIToImage("공유 배우")
 
+        self.Actorimg = LoadNaverAPIToImage(ActorName)
+        self.Actorimage = LoadImageFromURL(self.Actorimg['items'][0]['link'], 270, 380)
+        #self.Actorimage = LoadImageFromURL("https://search.pstatic.net/common?type=a&size=120x150&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fpeople%2F76%2F201706081735556361.jpg", 270, 380)
+        # people_info_z > div.cont_noline > div > div > a:nth-child(1) > img
+
+        self.ActorLabel.configure(image = self.Actorimage)
+        self.NameLabel.configure(text = ActorName)
 
     def Next(self):
         if self.BookmarkOn:
@@ -114,26 +128,29 @@ class ActorList():
         self.Bookmark()
 
     def Render(self):
-        self.InfoFrame.pack(side = RIGHT, expand=True)
         self.SearchFrame.pack(anchor = "nw", expand=True)
-        self.ListFrame.pack(anchor = "w",expand=True,fill="both")
+        self.InfoFrame.pack(fill="both")
+        #self.ListFrame.pack(anchor = "w",expand=True,fill="both")
 
         self.SearchFrameLabel.place(x = 10, y = 10)
-        self.SearchEntry.place(x=0, y=62)
-        self.SearchBnt.place(x = 355, y = 60)
+        self.SearchEntry.place(x = 300, y = 20)
+        self.SearchBnt.place(x = 670, y = 20)
 
-        self.ActorListBox.pack(side = LEFT)
+        self.ActorLabel.place(x = 0, y = 0)
+        self.NameLabel.place(x=280, y=0)
+
+        #self.ActorListBox.pack(side = LEFT)
         #self.ActorListBox.place(x = 0, y = 0)
-        self.ActorListScrollbar.pack(side=LEFT, fill="y")
+        #self.ActorListScrollbar.pack(side=LEFT, fill="y")
         #self.ActorListScrollbar.place(x = 340, y = 0)
-        self.NextBnt.place(x = 355, y = 10)
-        self.PrevBnt.place(x = 355, y = 40)             # 버튼 간격 30씩
-        self.InfoBnt.place(x = 355, y = 70)
-        self.BookmarkBnt.place(x = 355, y = 100)
-        self.AddBookmarkBnt.place(x = 355, y = 130)
-        self.SubBookmarkBnt.place(x = 355, y = 160)
+        #self.NextBnt.place(x = 355, y = 10)
+        #self.PrevBnt.place(x = 355, y = 40)             # 버튼 간격 30씩
+        #self.InfoBnt.place(x = 355, y = 70)
+        #self.BookmarkBnt.place(x = 355, y = 100)
+        #self.AddBookmarkBnt.place(x = 355, y = 130)
+        #self.SubBookmarkBnt.place(x = 355, y = 160)
 
-        self.NameLabel.place(x = 0, y = 0)
+        #self.NameLabel.place(x = 0, y = 0)
         #self.InfoCanvas.place(x = 0, y = 0)
 
     def GetFrame(self):
@@ -142,16 +159,25 @@ class ActorList():
 
 
 if __name__ == '__main__': # ReadData.py를 실행시킬때만 실행되는 내용
-    img = LoadNaverAPIToImage("공유")
-    profile = img['items']
-    print(profile)
-    print(profile[0]['link'])
-    window = Tk()
-    image = []
-    for data in profile:
-        image.append(LoadImageFromURL(profile[0]['link'], 500, 200))
-    label = Label(window, image = image[0])
-    label.pack()
-    window.mainloop()
+    actor = urllib.parse.quote("공유")
+    url = "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=" + actor
+    req = requests.get(url)
+    if req.ok:
+        html = req.text
+        soup = BeautifulSoup(html, 'html.parser')
+
+        imgselect = soup.select('people_info_z > div.cont_noline > div > div > a:nth-child(1) > img')
+        print(imgselect)
+    #img = LoadNaverAPIToImage("공유")
+    #profile = i#mg['items']
+    #print(profile)
+    #print(profile[0]['link'])
+    #window = Tk()
+    #image = []
+    #for data in profile:
+    #    image.append(LoadImageFromURL(profile[0]['link'], 500, 200))
+    #label = Label(window, image = image[0])
+    #label.pack()
+    #window.mainloop()
 
 
