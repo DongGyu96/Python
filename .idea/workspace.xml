@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="415c655c-290c-42ee-9cc8-09a103c05847" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/BoxOfficeProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BoxOfficeProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BoxOfficeProject/ActorList.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BoxOfficeProject/ActorList.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BoxOfficeProject/MovieList.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BoxOfficeProject/MovieList.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py" beforeDir="false" afterPath="$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,64 +12,50 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1297">
-                  <caret line="66" column="49" selection-start-line="66" selection-start-column="49" selection-end-line="66" selection-end-column="49" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ActorInfo.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="630">
-                  <caret line="107" column="1" selection-start-line="107" selection-start-column="1" selection-end-line="107" selection-end-column="1" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ReadData.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-97">
-                  <caret line="183" column="22" selection-start-line="183" selection-start-column="4" selection-end-line="183" selection-end-column="22" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchMovieList.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="4706">
-                  <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
-                  <folding>
-                    <element signature="e#0#21#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ReadData.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-406">
-                  <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="116">
+              <caret line="83" column="13" selection-start-line="83" selection-start-column="13" selection-end-line="83" selection-end-column="13" />
+              <folding>
+                <element signature="e#61#82#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ActorInfo.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="332">
+              <caret line="81" column="1" selection-start-line="81" selection-start-column="1" selection-end-line="81" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ReadData.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="296">
+              <caret line="208" lean-forward="true" selection-start-line="208" selection-end-line="208" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchMovieList.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2697">
+              <caret line="152" column="22" lean-forward="true" selection-start-line="152" selection-start-column="22" selection-end-line="152" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -86,6 +70,7 @@
       <find>div class=&quot;people_info</find>
       <find>div class=&quot;big_thumb</find>
       <find>Load</find>
+      <find>Btn</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -96,17 +81,17 @@
       <list>
         <option value="$PROJECT_DIR$/TicTacToe/main.py" />
         <option value="$PROJECT_DIR$/BoxOfficeProject/Launcher.py" />
-        <option value="$PROJECT_DIR$/BoxOfficeProject/ReadData.py" />
         <option value="$PROJECT_DIR$/BoxOfficeProject/ActorInfo.py" />
+        <option value="$PROJECT_DIR$/BoxOfficeProject/ReadData.py" />
         <option value="$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2619" />
-    <option name="y" value="-25" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+    <option name="x" value="240" />
+    <option name="y" value="135" />
+    <option name="width" value="1440" />
+    <option name="height" value="810" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -271,14 +256,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="2576" height="1456" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.15559158" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6596434" weight="0.3873016" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6596434" weight="0.3871409" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -293,13 +278,34 @@
       <window_info anchor="right" id="R Graphics" order="3" />
       <window_info anchor="right" id="R Packages" order="4" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.15559158" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6596434" visible="true" weight="0.3871409" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49972987" weight="0.3288889" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49972987" weight="0.3288889" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49972987" weight="0.3288889" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.34035656" side_tool="true" weight="0.42222223" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49918962" weight="0.3288889" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="R Graphics" order="3" />
+      <window_info anchor="right" id="R Packages" order="4" />
+    </layout-to-restore>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/BoxOfficeProject/SearchMovieList.py</url>
-          <line>105</line>
+          <line>107</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -359,17 +365,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ReadData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-97">
-          <caret line="183" column="22" selection-start-line="183" selection-start-column="4" selection-end-line="183" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchMovieList.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4706">
-          <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
+        <state relative-caret-position="-2697">
+          <caret line="152" column="22" lean-forward="true" selection-start-line="152" selection-start-column="22" selection-end-line="152" selection-end-column="22" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -378,15 +377,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ActorInfo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="107" column="1" selection-start-line="107" selection-start-column="1" selection-end-line="107" selection-end-column="1" />
+        <state relative-caret-position="332">
+          <caret line="81" column="1" selection-start-line="81" selection-start-column="1" selection-end-line="81" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BoxOfficeProject/ReadData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="208" lean-forward="true" selection-start-line="208" selection-end-line="208" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1297">
-          <caret line="66" column="49" selection-start-line="66" selection-start-column="49" selection-end-line="66" selection-end-column="49" />
+        <state relative-caret-position="116">
+          <caret line="83" column="13" selection-start-line="83" selection-start-column="13" selection-end-line="83" selection-end-column="13" />
+          <folding>
+            <element signature="e#61#82#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

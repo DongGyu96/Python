@@ -20,7 +20,7 @@ class ActorList():
         self.SearchFrame = Frame(self.Background, width = self.width, height = 70, bg = "light blue")
         self.SearchFrameLabel = Label(self.SearchFrame, font=("나눔 고딕", 25, "bold"), text="배우 상세 정보", bg = "light blue")
         self.SearchEntry = Entry(self.SearchFrame, width = 31, font=("HYHeadLine", 15, "bold"), bd = 6, relief = "ridge")
-        self.SearchBnt = Button(self.SearchFrame, text = "검색",   font=("나눔 고딕", 14, "bold"), width = 6, bd = 3, command = self.Search)
+        self.SearchBtn = Button(self.SearchFrame, text ="검색", font=("나눔 고딕", 14, "bold"), width = 6, bd = 3, command = self.Search)
 
         #self.BookmarkBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="북마크 보기", bd=3, width=9, command=self.Bookmark)
         #self.AddBookmarkBnt = Button(self.ListFrame, font=("HYHeadLine", 10, "bold"), text="북마크 저장", bd=3, width=9, command=self.AddBookmark)
@@ -41,7 +41,7 @@ class ActorList():
         self.NameLabel = Label(self.InfoFrame, font=("나눔 고딕", 25, "bold"), bg = "light blue")
         self.NewsLabel = Label(self.InfoFrame, font=("나눔 고딕", 25, "bold"), bg = "light blue")
 
-        #self.NewsTitleLabel = [Label(self.InfoFrame, )]
+        self.NewsTitleBtn= []
 
 
     def Search(self):
@@ -72,15 +72,22 @@ class ActorList():
         if not req.ok:
             return
 
-        #self.NewsTitleLabel.clear()
+        for btn in self.NewsTitleBtn:
+            btn.destroy()
+        self.NewsTitleBtn.clear()
         html = req.text
         soup = BeautifulSoup(html, 'html.parser')
         News = soup.select('ul.type01 > li > dl > dt > a')
         for n in News:
-            #self.NewsTitleLabel.append(Label(self.InfoFrame, font=("나눔 고딕", 11, "bold"), text=n['title'], bg = "light blue"))
-            print(n['title'], n['href'])
+            text = n['title']
+            self.NewsTitleBtn.append(Button(self.InfoFrame, font=("나눔 고딕", 11, "bold"), text=text[:30] + "...", bg = "light blue", bd = 0, command = lambda url = n['href'] : self.NewsLink(url)))
+            #print(n['title'], n['href'])
 
+        for i in range(len(self.NewsTitleBtn)):
+            self.NewsTitleBtn[i].place(x = self.width / 2 , y = 33 * i + 45)
 
+    def NewsLink(self, link):
+        OpenWebBrowser(link)
 
     def Bookmark(self):
         self.BookmarkOn = True
@@ -113,13 +120,12 @@ class ActorList():
 
         self.SearchFrameLabel.place(x = 10, y = 10)
         self.SearchEntry.place(x = 300, y = 20)
-        self.SearchBnt.place(x = 670, y = 20)
+        self.SearchBtn.place(x = 670, y = 20)
 
         self.ActorLabel.place(x = 0, y = 0)
         self.NameLabel.place(x=150, y=0)
         self.NewsLabel.place(x = self.width/ 2 , y = 0)
-        #for i in  range(len(self.NewsTitleLabel)):
-        #    self.NewsTitleLabel[i].place(x = 150, y = 20 + (i * 20))
+
         #self.BookmarkBnt.place(x = 355, y = 100)
         #self.AddBookmarkBnt.place(x = 355, y = 130)
         #self.SubBookmarkBnt.place(x = 355, y = 160)
