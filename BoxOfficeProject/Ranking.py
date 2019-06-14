@@ -5,7 +5,7 @@ from RankingGraph import *
 
 class Ranking():
     def __init__(self, window, width, height):
-        self.boxofficeimage = PhotoImage(file="image/Ranking2.png")
+        self.boxofficeimage = PhotoImage(file="image/Ranking.png")
         self.BoxofficeData = None
         self.boxofficetype = None
         self.Graph = None
@@ -169,7 +169,7 @@ class Ranking():
         self.monthlabel.place(x = 180, y = 0)
         self.daylabel.place(x = 260, y = 0)
         self.setrankbutton.place(x = 310, y = 35)
-        self.boxofficelabel.pack()
+        self.boxofficelabel.place(x= -20, y = 0)
         self.datelabel.place(x = 20, y = 100)
         self.nextrankingbutton.place(x = 200, y = 70)
         self.prevrankingbutton.place(x=100, y=70)

@@ -41,10 +41,10 @@ class Interface:
         self.SearchIcon = PhotoImage(file="image/SearchIcon2.png")
         self.SettingIcon = PhotoImage(file="image/SettingIcon2.png")
         self.ActorSearchIcon = PhotoImage(file="image/ActorSearchIcon2.png")
-        self.titleimage = PhotoImage(file="image/TitleImage.png")
+        self.titleimage = PhotoImage(file="image/TitleImage1.png")
 
     def Draw(self):
-        self.titlelabel.place(x=self.width - 370, y=5)
+        self.titlelabel.place(x=375, y=5)
         self.notebook.place(x=10, y=40)
         self.MovieList.Render()
         self.Ranking.Render()

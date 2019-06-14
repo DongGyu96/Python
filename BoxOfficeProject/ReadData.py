@@ -203,6 +203,10 @@ def LoadNaverAPIToNews(name):
 def OpenWebBrowser(url):
     webbrowser.open_new(url)
 
+def OpenNaverWebBrowser(name):
+    name = urllib.parse.quote(name)
+    webbrowser.open_new("https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=" + name)
+
 # tkinter 버튼 함수
 # command로 인자받는법 : 람다함수 사용
 # command = lambda index = i: func(index)
@@ -211,12 +215,11 @@ def OpenWebBrowser(url):
 def LoadGoogleAPIMapToURL(lat, lon):
     url = "https://maps.googleapis.com/maps/api/" \
     "staticmap?" \
-    "?zoom=13" \
-    "&size=600x300" \
+    "?zoom=5" \
+    "&size=295x300" \
     "&maptype=roadmap" \
     "&markers=color:blue%7Clabel:G%7C" + str(lat) + "," + str(lon) + "" \
     "&key=AIzaSyCYpTRneF3xvsbc37jgxbFk5e1AfDAJ8jo"
-    print(url)
     raw_data = urllib.request.urlopen(url).read()
     im = Image.open(BytesIO(raw_data))
     data = ImageTk.PhotoImage(im)
@@ -244,6 +247,18 @@ def LoadNaverAPIToTest(name):
     else:
         print("Error Code:" + rescode)
         return None
+
+def LoadGoogleAPIGeocoding(address):
+    address = urllib.parse.quote(address)
+    url = "https://maps.googleapis.com/maps/api/geocode/xml?" \
+          "address=" + address + ""\
+          "&key=AIzaSyCYpTRneF3xvsbc37jgxbFk5e1AfDAJ8jo"
+    Data = urllib.request.urlopen(url).read()
+    Data = BeautifulSoup(Data, "html.parser")
+    address = []
+    address.append(Data.find("lat").string)
+    address.append(Data.find("lng").string)
+    return address
 
 if __name__ == '__main__': # ReadData.py를 실행시킬때만 실행되는 내용
     # ip = geocoder.ip('me').ip

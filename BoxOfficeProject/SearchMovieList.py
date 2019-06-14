@@ -8,7 +8,7 @@ class MovieList():
         self.movielistpage = 1  # 1부터 페이지를 넘길거기 때문
         self.width = width
         self.height = height
-
+        self.labelimage = PhotoImage(file = 'image/SearchMovieLabel.png')
         self.noImage = PhotoImage(file = 'image/NoImage.png')
         temp = 'light blue'
         #bd = 두깨 크기
@@ -23,9 +23,9 @@ class MovieList():
         self.framesearch2 = Frame(self.SearchFrame, width=self.width / 2, height=self.height, bd=0, relief="solid",
                                   background= temp)
         self.framemovielist = Frame(self.SearchFrame, width=330, height=350, background="white")
-        self.movielistscrollbar = Scrollbar(self.framemovielist)
-        self.movielistbox = Listbox(self.framemovielist, width=21, height=22, bd=6, relief="sunken",
-                                    font = ("HYHeadLine", 20, "bold"),
+        self.movielistscrollbar = Scrollbar(self.framemovielist, width = 18)
+        self.movielistbox = Listbox(self.framemovielist, width=27, height=22, bd=6, relief="sunken",
+                                    font = ("휴면엑스포", 15, "bold"),
                                     yscrollcommand=self.movielistscrollbar.set, bg = "azure",
                                     selectbackground = "orange", selectforeground = "black", selectborderwidth = 2,
                                     borderwidth = 4, fg = "black", highlightbackground = "gray",highlightthickness = 2)
@@ -35,9 +35,9 @@ class MovieList():
         self.movieinfocanvas.bind("<Button-1>", self.Click)
         self.find = False
 
-        self.SearchFrameLabel = Label(self.framesearch1, font=("Impact", 25, "bold"), text="영화 상세 정보", bg = temp)
+        self.SearchFrameLabel = Label(self.framesearch1, image = self.labelimage, bg = temp)
 
-        self.searchmovie = Entry(self.framesearch1, font=("HYHeadLine", 15, "bold"), width=31, bd=6, relief="ridge", bg = "azure")
+        self.searchmovie = Entry(self.framesearch1, font=("휴면엑스포", 15, "bold"), width=29, bd=6, relief="sunken", bg = "azure")
         self.searchmoviebutton = Button(self.SearchFrame, font=("HYHeadLine", 14, "bold"), text="검색", width=6,
                                         bd=3, command = self.Search)
         self.nextmoviebutton = Button(self.SearchFrame, font=("HYHeadLine", 10, "bold"), text="다음 페이지", bd=3,
@@ -278,7 +278,7 @@ class MovieList():
         self.movielistscrollbar.pack(side=RIGHT, fill="y")
         self.movielistbox.pack(anchor="s")
         self.movieinfocanvas.pack(side=RIGHT)
-        self.SearchFrameLabel.place(x=10, y=10)
+        self.SearchFrameLabel.place(x=5, y=-5)
         self.searchmovie.place(x=0, y=62)
         self.searchmoviebutton.place(x=360, y=60)
         self.nextmoviebutton.place(x=360, y=110)
