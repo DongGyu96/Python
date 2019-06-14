@@ -37,7 +37,7 @@ class SearchTheater():
 
         #self.searchScrollbar1 = Scrollbar(self.SearchFrame1)
         self.searchState = Listbox(self.SearchFrame1, width = 15, height = height, font = ("HYHeadLine", 16, "bold"),
-                                   bg = "light slate gray", fg = "white", exportselection = True)
+                                   bg = "light slate gray", fg = "white", exportselection = True, relief = "flat")
         self.searchState.bind("<Double-Button-1>", self.SelectState)
 
         self.prevSelectState = -1
@@ -46,7 +46,7 @@ class SearchTheater():
 
         self.searchScrollbar2 = Scrollbar(self.SearchFrame2)
         self.searchCity = Listbox(self.SearchFrame2, width = 12, height=height, yscrollcommand=self.searchScrollbar2.set,
-                                  bg = "light slate gray", font = ("HYHeadLine", 16, "bold"), fg = "white")
+                                  bg = "light slate gray", font = ("HYHeadLine", 16, "bold"), fg = "white", relief = "flat")
         self.searchScrollbar2["command"] = self.searchCity.yview
         self.CityNum = 0
         self.TheaterNum = 0
@@ -56,7 +56,7 @@ class SearchTheater():
 
         self.searchScrollbar3 = Scrollbar(self.SearchFrame3)
         self.searchTheater = Listbox(self.SearchFrame3, width = 20, height=height, yscrollcommand=self.searchScrollbar3.set,
-                                     bg = "light slate gray", font = ("HYHeadLine", 16, "bold"), fg = "white")
+                                     bg = "light slate gray", font = ("HYHeadLine", 16, "bold"), fg = "white", relief = "flat")
         self.searchScrollbar3["command"] = self.searchTheater.yview
         self.searchTheater.bind("<Double-Button-1>", self.SelectTheater)
 

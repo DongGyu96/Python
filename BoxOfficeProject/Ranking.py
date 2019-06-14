@@ -6,6 +6,10 @@ from RankingGraph import *
 class Ranking():
     def __init__(self, window, width, height):
         self.boxofficeimage = PhotoImage(file="image/Ranking.png")
+        self.nextbuttonImage = PhotoImage(file='image/Button/NextPageIcon1.png')
+        self.prevbuttonImage = PhotoImage(file='image/Button/PrevPageIcon1.png')
+        self.searchImage = PhotoImage(file = 'image/SearchIcon.png')
+        self.rankImage = PhotoImage(file = 'image/RankingIcon.png')
         self.BoxofficeData = None
         self.boxofficetype = None
         self.Graph = None
@@ -40,21 +44,21 @@ class Ranking():
                                 from_=1, to=12)
         self.daybox = Spinbox(self.frameranking1, font=self.font, width=5, borderwidth=3, relief="ridge",
                               from_=1, to=31)
-        self.font = Font(family="맑은 고딕", size=15, weight="bold")
+        self.font = Font(family="맑은 고딕", size=14, weight="bold")
         self.ranktypelabel = Label(self.frameranking1, font=self.font, text="분류", bg = framecolor)
         self.yearlabel = Label(self.frameranking1, font=self.font, text="연도", bg = framecolor)
         self.monthlabel = Label(self.frameranking1, font=self.font, text="달", bg = framecolor)
         self.daylabel = Label(self.frameranking1, font=self.font, text="일", bg = framecolor)
 
-        self.setrankbutton = Button(self.frameranking1, font=self.font, text="갱신",
+        self.setrankbutton = Button(self.frameranking1, image = self.searchImage, bg = "DodgerBlue4",
                                     command=lambda set=True: self.SetRanking(set))
         # command = lambda index = i: func(index)
         self.datelabel = Label(self.frameranking1, font=self.font, text=" ", bg = framecolor)
-        self.nextrankingbutton = Button(self.frameranking1, font=("consolas ", 10, "bold"), text="다음 페이지",
+        self.nextrankingbutton = Button(self.frameranking1, image = self.nextbuttonImage, bg = "DodgerBlue4",
                                         command=self.NextRanking)
-        self.prevrankingbutton = Button(self.frameranking1, font=("consolas", 10, "bold"), text="이전 페이지",
+        self.prevrankingbutton = Button(self.frameranking1, image = self.prevbuttonImage, bg = "DodgerBlue4",
                                         command=self.PrevRanking)
-        self.creategraphbutton = Button(self.frameranking1, font = self.font, text = "통계", command = self.CreateGraph)
+        self.creategraphbutton = Button(self.frameranking1, image = self.rankImage, bg = "DodgerBlue4", command = self.CreateGraph)
         # self.BoxofficeData = LoadXMLFromBoxofficeData(self.boxofficetype, self.date);
 
     def SetRanking(self, set):
@@ -160,20 +164,20 @@ class Ranking():
             self.rankcanvas[i].place(x= (i * 300) + 20, y = 150)
         self.frametitle.place(x = 10, y = 10)
         self.frameranking1.place(x = 420, y = 0)
-        self.ranktypebox.place(x = 0, y = 35)
-        self.yearbox.place(x = 70, y = 35)
-        self.monthbox.place(x = 150, y = 35)
-        self.daybox.place(x = 230, y = 35)
-        self.ranktypelabel.place(x = 5, y = 0)
-        self.yearlabel.place(x = 80, y = 0)
-        self.monthlabel.place(x = 180, y = 0)
-        self.daylabel.place(x = 260, y = 0)
-        self.setrankbutton.place(x = 310, y = 35)
+        self.ranktypebox.place(x = 0, y = 27)
+        self.yearbox.place(x = 70, y = 27)
+        self.monthbox.place(x = 150, y = 27)
+        self.daybox.place(x = 230, y = 27)
+        self.ranktypelabel.place(x = 5, y = -3)
+        self.yearlabel.place(x = 80, y = -3)
+        self.monthlabel.place(x = 180, y = -3)
+        self.daylabel.place(x = 260, y = -3)
+        self.setrankbutton.place(x = 320, y = 10)
         self.boxofficelabel.place(x= -20, y = 0)
         self.datelabel.place(x = 20, y = 100)
-        self.nextrankingbutton.place(x = 200, y = 70)
-        self.prevrankingbutton.place(x=100, y=70)
-        self.creategraphbutton.place(x=380, y = 35)
+        self.nextrankingbutton.place(x = 260, y = 60)
+        self.prevrankingbutton.place(x=70, y=60)
+        self.creategraphbutton.place(x=395, y = 10)
 
     def NextRanking(self):
         if not self.BoxofficeData == None:
@@ -192,3 +196,30 @@ class Ranking():
 
     def GetFrame(self):
         return self.RankingFrame
+
+    def GetRanking(self, list):
+        if list[0] == "일간":
+            daytype = DAILY
+            typename = "dailyboxoffice"
+        else:
+            daytype = WEEKLY
+            typename = "weeklyboxoffice"
+
+        if len(list[1]) != 8:
+            return None
+        date = list[1]
+
+        telegramData = LoadXMLFromFileBoxOffice(daytype, date)
+        boxoffice = []
+        boxoffice.append("조회 날짜 : " + telegramData.find("showrange").string)
+        for data in telegramData.find_all(typename):
+            text = data.rank.string + "위 \n"
+            text = text + "영화 제목 : " + data.movienm.string + "\n"
+            text = text + "개봉일 : " + data.opendt.string + "\n"
+            text = text + "해당 기간 관객수 : " + data.audicnt.string + "\n"
+            text = text + "전 일/주 증감분 : " + data.audiinten.string + " (" + data.audichange.string + "%) \n"
+            text = text + "누적 관객수 : " + data.audiacc.string + "\n"
+            text = text + "누적 매출액 : " + data.salesacc.string + "원 \n"
+            text = text + "해당 기간 상영 횟수 : " + data.showcnt.string + "회"
+            boxoffice.append(text)
+        return boxoffice

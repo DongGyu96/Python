@@ -5,6 +5,7 @@ from SearchActorList import *
 from SearchTheater import *
 from tkinter.font import *
 import tkinter.ttk
+from TelegramBot import *
 
 
 class Interface:
@@ -34,6 +35,10 @@ class Interface:
         self.SettingFrame = Frame(window, bd=2, relief="solid")
         self.notebook.add(self.SettingFrame, image=self.SettingIcon)
 
+        self.TeleBot = TeleBot(self)
+        self.TeleBot.Message_Loop()
+
+
     def SetPhotoImage(self):
         # label, button에도 사용 가능
         self.RankingIcon = PhotoImage(file="image/RankingIcon4.png")
@@ -50,3 +55,6 @@ class Interface:
         self.Ranking.Render()
         self.ActorList.Render()
         self.TheaterList.Render()
+
+    def GetRanking(self, list):
+        return self.Ranking.GetRanking(list)

@@ -10,6 +10,11 @@ class MovieList():
         self.height = height
         self.labelimage = PhotoImage(file = 'image/SearchMovieLabel.png')
         self.noImage = PhotoImage(file = 'image/NoImage.png')
+        self.clearimage = PhotoImage(file = 'image/Button/ClearPageIcon2.png')
+        self.nextimage = PhotoImage(file='image/Button/NextPageIcon2.png')
+        self.previmage = PhotoImage(file='image/Button/PrevPageIcon2.png')
+        self.infoimage = PhotoImage(file='image/Button/MoreInfoIcon2.png')
+        self.searchimage = PhotoImage(file='image/Button/SearchHereIcon2.png')
         temp = 'light blue'
         #bd = 두깨 크기
         #relief = 외곽선 설정
@@ -23,7 +28,7 @@ class MovieList():
         self.framesearch2 = Frame(self.SearchFrame, width=self.width / 2, height=self.height, bd=0, relief="solid",
                                   background= temp)
         self.framemovielist = Frame(self.SearchFrame, width=330, height=350, background="white")
-        self.movielistscrollbar = Scrollbar(self.framemovielist, width = 18)
+        self.movielistscrollbar = Scrollbar(self.framemovielist, width = 14)
         self.movielistbox = Listbox(self.framemovielist, width=27, height=22, bd=6, relief="sunken",
                                     font = ("휴면엑스포", 15, "bold"),
                                     yscrollcommand=self.movielistscrollbar.set, bg = "azure",
@@ -37,18 +42,14 @@ class MovieList():
 
         self.SearchFrameLabel = Label(self.framesearch1, image = self.labelimage, bg = temp)
 
-        self.searchmovie = Entry(self.framesearch1, font=("휴면엑스포", 15, "bold"), width=29, bd=6, relief="sunken", bg = "azure")
-        self.searchmoviebutton = Button(self.SearchFrame, font=("HYHeadLine", 14, "bold"), text="검색", width=6,
+        self.searchmovie = Entry(self.framesearch1, font=("휴면엑스포", 16, "bold"), width=26, bd=6, relief="sunken", bg = "azure")
+        self.searchmoviebutton = Button(self.SearchFrame, image = self.searchimage, bg = "SteelBlue4",
                                         bd=3, command = self.Search)
-        self.nextmoviebutton = Button(self.SearchFrame, font=("HYHeadLine", 10, "bold"), text="다음 페이지", bd=3,
-                                      width=9, command=self.NextMovie)
-        self.prevmoviebutton = Button(self.SearchFrame, font=("HYHeadLine", 10, "bold"), text="이전 페이지", bd=3,
-                                      width=9, command=self.PrevMovie)
-        self.infobutton = Button(self.SearchFrame, font = ("HYHeadLine", 10, "bold"), text = "상세 정보", bd = 3,
-                                 width = 9, command = self.Info)
+        self.nextmoviebutton = Button(self.SearchFrame, image = self.nextimage, bd=3, command=self.NextMovie, bg = "SteelBlue4")
+        self.prevmoviebutton = Button(self.SearchFrame, image = self.previmage, bd=3, command=self.PrevMovie, bg = "SteelBlue4")
+        self.infobutton = Button(self.SearchFrame, image = self.infoimage, bd = 3, command = self.Info, bg = "SteelBlue4")
 
-        self.resetbutton = Button(self.SearchFrame, font = ("HYHeadLine", 10, "bold"), text = "초기화", bd = 3,
-                                  width = 9, command = self.Reset)
+        self.resetbutton = Button(self.SearchFrame, image = self.clearimage, bd = 3, command = self.Reset, bg = "SteelBlue4")
         self.setpage = Entry(self.SearchFrame, font=("HYHeadLine", 15, "bold"), width=7, bg = temp)
         self.setpage.insert(0, str(self.movielistpage))
         self.pagelabel = Label(self.SearchFrame, font =("HYHeadLine", 15, "bold"), text = "[Page]", bg = temp)
@@ -280,13 +281,13 @@ class MovieList():
         self.movieinfocanvas.pack(side=RIGHT)
         self.SearchFrameLabel.place(x=5, y=-5)
         self.searchmovie.place(x=0, y=62)
-        self.searchmoviebutton.place(x=360, y=60)
-        self.nextmoviebutton.place(x=360, y=110)
-        self.prevmoviebutton.place(x=360, y=140)
-        self.infobutton.place(x=360, y= 170)
-        self.resetbutton.place(x=360, y = 230)
-        self.setpage.place(x=360, y= 430)
-        self.pagelabel.place(x=360, y = 400)
+        self.searchmoviebutton.place(x=330, y=60)
+        self.nextmoviebutton.place(x=330, y=110)
+        self.prevmoviebutton.place(x=330, y=150)
+        self.infobutton.place(x=330, y= 190)
+        self.resetbutton.place(x=330, y = 230)
+        self.setpage.place(x=330, y= 430)
+        self.pagelabel.place(x=330, y = 400)
 
     def Reset(self):
         self.movielistpage = 1

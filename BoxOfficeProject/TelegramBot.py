@@ -3,6 +3,7 @@ import telepot
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import time
+import copy
 
 # 텔레그램
 # 835222947:AAE3d-gEnxi63uVa4pwKf9y5FLeJh3lZanA
@@ -14,21 +15,16 @@ import time
 # + 구글 검색 api
 
 class TeleBot:
-    def __init__(self):
+    def __init__(self, interface):
         self.tokken = '835222947:AAE3d-gEnxi63uVa4pwKf9y5FLeJh3lZanA'
         self.chatID = '805144083'
         self.bot = telepot.Bot(self.tokken)
-        print(self.bot.getMe())
 
-        url = 'http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/' \
-              'getRTMSDataSvcAptTrade' \
-              '?serviceKey=sea100UMmw23Xycs33F1EQnumONR%2F9ElxBLzkilU9Yr1oT4TrCot8Y2p0jyuJP72x9rG9D8CN5yuEs6AS2sAiw%3D%3D' \
-              '&LAWD_CD=11110' \
-              '&DEAL_YMD=201712'
-        response = urlopen(url).read()
-        Data = BeautifulSoup(response, "html.parser")
-        #print(Data)
+        self.SendMessage("영화 박스오피스 텔레그램 봇이 실행되었습니다.")
         self.Help()
+        self.Program = copy.copy(interface)
+    def __del__(self):
+        self.SendMessage("영화 박스오피스 텔레그램 봇이 종료되었습니다.")
 
     def SendMessage(self, text):
         self.bot.sendMessage(self.chatID, str(text))
@@ -44,17 +40,25 @@ class TeleBot:
             return
 
         text = msg['text']
-        args = text.split(' ')
-        print(text)
-        print(args)
-        print(args[0])
-        print(args[1])
+        list = text.split(' ')
+        if list[0] == "일간" or list[0] == "주간":
+            Data = self.Program.GetRanking(list)
+            if Data == None:
+                self.SendMessage('잘못된 명령어입니다. 다시 확인해주세요')
+                self.Help()
+            else:
+                for data in Data:
+                    self.SendMessage(data)
 
     def Help(self):
-        text = "일간 날짜(yyyymmdd) \n"
-        text = text + "주간 날짜(yyyymmdd) \n"
-        text = text + "영화 영화이름 \n"
-        text = text + "배우 배우이름"
+        text = "======= 명령어 ======= \n"
+        text = text + "일간      날짜(yyyymmdd) \n"
+        text = text + "주간      날짜(yyyymmdd) \n"
+        text = text + "영화      영화이름 \n"
+        text = text + "배우      배우이름 \n"
+        text = text + "영화관   주소 \n"
+        text = text + "ex) 일간 20190601 \n"
+        text = text + "ex) 영화관 정왕동"
         self.SendMessage(text)
 
 
