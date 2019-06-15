@@ -3,6 +3,8 @@ from Ranking import *
 from SearchMovieList import *
 from SearchActorList import *
 from SearchTheater import *
+from Mail import *
+
 from tkinter.font import *
 import tkinter.ttk
 from TelegramBot import *
@@ -32,8 +34,9 @@ class Interface:
         self.TheaterList = SearchTheater(window, width, height)
         self.notebook.add(self.TheaterList.GetFrame(), image=self.MapIcon)
 
-        self.SettingFrame = Frame(window, bd=2, relief="solid")
-        self.notebook.add(self.SettingFrame, image=self.SettingIcon)
+        #self.SettingFrame = Frame(window, bd=2, relief="solid")
+        self.GamilFrame = Gmail(window, width, height, self)
+        self.notebook.add(self.GamilFrame.GetFrame(), image=self.SettingIcon)
 
         self.TeleBot = TeleBot(self)
         self.TeleBot.Message_Loop()
@@ -55,6 +58,7 @@ class Interface:
         self.Ranking.Render()
         self.ActorList.Render()
         self.TheaterList.Render()
+        self.GamilFrame.Render()
 
     def GetRanking(self, list):
         return self.Ranking.GetRanking(list)

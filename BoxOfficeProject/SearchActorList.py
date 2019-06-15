@@ -19,7 +19,7 @@ class ActorList():
         self.Background = Frame(window, bd=2, relief="solid", background="light blue")
 
         self.SearchFrame = Frame(self.Background, width = self.width, height = 70, bg = "light blue")
-        self.SearchFrameLabel = Label(self.SearchFrame, font=("나눔 고딕", 25, "bold"), text="배우 상세 정보", bg = "light blue")
+        self.SearchFrameLabel = Label(self.SearchFrame, font=("나눔 고딕", 25, "bold"), text="인물 상세 정보", bg = "light blue")
         self.SearchEntry = Entry(self.SearchFrame, width = 31, font=("HYHeadLine", 15, "bold"), bd = 1 , relief = "solid", bg = "light blue")
         self.searchImage = PhotoImage(file='image/Button/SearchHereIcon3.png')
         self.SearchBtn = Button(self.SearchFrame, image = self.searchImage, command=self.Search,bg= "light blue", bd = 0)
@@ -60,7 +60,7 @@ class ActorList():
             return
 
         self.Actor.clear()
-        self.Actor.append(ActorName)
+        self.Actor.append("이름 "+ ActorName)
         self.NameLabel.configure(text = ActorName)
 
         #url = "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=" + ActorName
@@ -138,8 +138,9 @@ class ActorList():
         if len(self.ActorMovie) != 0:
             self.ActorMovieLabel.configure(text="출연 작품")
             self.ActorMovieLabel.place(x=110, y=self.LastInfoY + 70)
+            self.Actor.append("출연 작품")
 
-            for i in range(3):
+            for i in range(len(self.ActorMovieImgLabel)):
                 self.ActorMovieImgLabel[i].place(x = 180 + (100 * i), y = self.LastInfoY + 50)
                 self.ActorMovie[i][1].place(x = 180 + (100 * i), y = self.LastInfoY + 135)
                 self.Actor.append(self.ActorMovie[i][0])
@@ -161,6 +162,8 @@ class ActorList():
         self.NewsTitleBtn.clear()
 
         news = self.GetNews(ActorName)
+        self.Actor.append("관련 뉴스")
+
         for text in news:
             t = text[0]
             if len(t) > 29:
@@ -252,7 +255,7 @@ class ActorList():
 
     def Bookmark(self, actor):
         if len(actor) == 0:
-            return
+            return None
         index = self.FindIndexToBookmarkList(actor[0])  # -1이면  없는거임
         if not index == -1:
             self.BookmarkList.pop(index)
