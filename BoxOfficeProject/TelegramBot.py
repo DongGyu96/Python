@@ -16,7 +16,7 @@ import copy
 class TeleBot:
     def __init__(self, interface):
         self.tokken = '835222947:AAE3d-gEnxi63uVa4pwKf9y5FLeJh3lZanA'
-        self.chatID = '805144083'
+        self.chatID = '646150383'
         self.bot = telepot.Bot(self.tokken)
 
         #self.SendMessage("영화 박스오피스 텔레그램 봇이 실행되었습니다.")
