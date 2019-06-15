@@ -11,112 +11,27 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DockManager">
-    <window id="2">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/BoxOfficeProject/Interface.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1034">
-                    <caret line="73" selection-start-line="73" selection-end-line="73" />
-                    <folding>
-                      <element signature="e#0#21#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/BoxOfficeProject/Launcher.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="29">
-                    <caret line="1" column="14" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="14" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="-268">
-                    <caret line="68" column="19" lean-forward="true" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
-                    <folding>
-                      <element signature="e#61#82#0" expanded="true" />
-                      <element signature="e#6856#7948#0" />
-                      <element signature="e#7275#7579#0" />
-                      <element signature="e#8002#8253#0" />
-                      <element signature="e#8293#8586#0" />
-                      <element signature="e#9127#9147#0" />
-                      <element signature="e#9567#9704#0" />
-                      <element signature="e#10242#10264#0" />
-                      <element signature="e#10374#11434#0" />
-                      <element signature="e#11500#11671#0" />
-                      <element signature="e#11675#11687#0" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchMovieList.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="790">
-                    <caret line="37" column="92" selection-start-line="37" selection-start-column="80" selection-end-line="37" selection-end-column="92" />
-                    <folding>
-                      <element signature="e#0#21#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/BoxOfficeProject/TelegramBot.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="-1899">
-                    <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-                    <folding>
-                      <element signature="e#23#37#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/../빠르게활용하는 파이썬 3.6 프로그래밍 python36-master/python36-master/2부/17장/gmail.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1044">
-                    <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
-                    <folding>
-                      <element signature="e#24#40#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BoxOfficeProject/Mail.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="22" column="79" selection-start-line="22" selection-start-column="79" selection-end-line="22" selection-end-column="79" />
+            <state relative-caret-position="195">
+              <caret line="55" column="67" lean-forward="true" selection-start-line="55" selection-start-column="67" selection-end-line="55" selection-end-column="67" />
               <folding>
                 <element signature="e#24#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchMovieList.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="442" selection-start-line="442" selection-end-line="442" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -169,8 +84,8 @@
         <option value="$PROJECT_DIR$/BoxOfficeProject/Gmail.py" />
         <option value="$PROJECT_DIR$/BoxOfficeProject/Interface.py" />
         <option value="$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py" />
-        <option value="$PROJECT_DIR$/BoxOfficeProject/SearchMovieList.py" />
         <option value="$PROJECT_DIR$/BoxOfficeProject/Mail.py" />
+        <option value="$PROJECT_DIR$/BoxOfficeProject/SearchMovieList.py" />
       </list>
     </option>
   </component>
@@ -184,25 +99,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Python" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Python" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Python" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Python" type="462c0819:PsiDirectoryNode" />
-              <item name="BoxOfficeProject" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -367,7 +264,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6596434" weight="0.24555555" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6596434" weight="0.4488889" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -478,16 +375,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../빠르게활용하는 파이썬 3.6 프로그래밍 python36-master/python36-master/2부/17장/gmail.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1044">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="e#24#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files (x86)/Microsoft Visual Studio/Shared/Python36_64/Lib/tkinter/constants.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -502,12 +389,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BoxOfficeProject/TelegramBot.py">
+    <entry file="file://C:/Program Files (x86)/Microsoft Visual Studio/Shared/Python36_64/Lib/tkinter/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1899">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="209">
+          <caret line="2802" selection-start-line="2802" selection-end-line="2802" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../빠르게활용하는 파이썬 3.6 프로그래밍 python36-master/python36-master/2부/17장/gmail.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
           <folding>
-            <element signature="e#23#37#0" expanded="true" />
+            <element signature="e#24#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BoxOfficeProject/Interface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2117">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -519,47 +423,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BoxOfficeProject/Interface.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1034">
-          <caret line="73" selection-start-line="73" selection-end-line="73" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Microsoft Visual Studio/Shared/Python36_64/Lib/tkinter/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="2802" selection-start-line="2802" selection-end-line="2802" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchActorList.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-268">
-          <caret line="68" column="19" lean-forward="true" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
+        <state relative-caret-position="1798">
+          <caret line="68" column="19" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
           <folding>
             <element signature="e#61#82#0" expanded="true" />
-            <element signature="e#6856#7948#0" />
-            <element signature="e#7275#7579#0" />
-            <element signature="e#8002#8253#0" />
-            <element signature="e#8293#8586#0" />
-            <element signature="e#9127#9147#0" />
-            <element signature="e#9567#9704#0" />
-            <element signature="e#10242#10264#0" />
-            <element signature="e#10374#11434#0" />
-            <element signature="e#11500#11671#0" />
-            <element signature="e#11675#11687#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BoxOfficeProject/TelegramBot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#23#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files (x86)/Microsoft Visual Studio/Shared/Python36_64/Lib/site-packages/telepot/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="149" selection-start-line="149" selection-end-line="149" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BoxOfficeProject/SearchMovieList.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="790">
-          <caret line="37" column="92" selection-start-line="37" selection-start-column="80" selection-end-line="37" selection-end-column="92" />
+        <state relative-caret-position="209">
+          <caret line="442" selection-start-line="442" selection-end-line="442" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -568,8 +462,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BoxOfficeProject/Mail.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="22" column="79" selection-start-line="22" selection-start-column="79" selection-end-line="22" selection-end-column="79" />
+        <state relative-caret-position="195">
+          <caret line="55" column="67" lean-forward="true" selection-start-line="55" selection-start-column="67" selection-end-line="55" selection-end-column="67" />
           <folding>
             <element signature="e#24#38#0" expanded="true" />
           </folding>

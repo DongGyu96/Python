@@ -47,10 +47,12 @@ class Gmail:
     def AddBookMarkList(self):
         self.BookMarkList.delete(0, len(self.BookMarkInfoList))
         self.BookMarkInfoList.clear()
-        #MovieBookMark = self.interface.GetMovieBookMark()
-        #for d in MovieBookMark:
-        #    self.BookmarkList.append(d)
-         #   self.BookMarkList.insert(END, "영화 - " + d[0])
+        MovieBookMark = self.interface.MovieList.GetBookmark()
+        #print(MovieBookMark)
+        for d in MovieBookMark:
+            print(d)
+            self.BookMarkInfoList.append(d)
+            self.BookMarkList.insert(END, "영화 - " + d[0].replace("영화 이름 ", ""))
         ActorBookMark = self.interface.ActorList.GetActorBookmark()
         for d in ActorBookMark:
             self.BookMarkInfoList.append(d)
