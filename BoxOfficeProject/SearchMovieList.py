@@ -407,4 +407,33 @@ class MovieList():
         return MovieInfo
 
     def GetBookmark(self):
-        return self.BookmarkMovie
+        movie = []
+        Bookmark = []
+        for data in self.BookmarkMovie:
+            movie.append("영화 이름 : " + data.name)
+            movie.append("개봉일 : " + data.data.find("opendt").string)
+            movie.append("상영 시간 : " + data.data.find("showtm").string + "분")
+            text = ""
+            for gerne in data.data.find_all("genre"):
+                text = text + ", " +  gerne.find("genrenm").string
+            movie.append("장르 : " + text)
+            text = ""
+
+            for director in data.data.find_all("director"):
+                text = text + ", " + director.find("peoplenm").string
+            movie.append("감독 : " + text)
+            text = ""
+
+            num = 0
+            for actor in data.data.find_all("actor"):
+                text = text + ", " + actor.find("peoplenm").string
+                num += 1
+                if num > 6:
+                    break
+            movie.append("출연 배우 : " + text)
+            text = ""
+
+            movie.append("심의 등급 : " + data.data.find("watchgradenm").string)
+            movie.append("제작 국가 : " + data.data.find("nationnm").string)
+            Bookmark.append(movie)
+        return Bookmark
