@@ -7,6 +7,7 @@ from ReadData import *
 import ActorInfo
 import requests
 import urllib.parse
+import copy
 from bs4 import BeautifulSoup
 
 class ActorList():
@@ -19,13 +20,19 @@ class ActorList():
 
         self.SearchFrame = Frame(self.Background, width = self.width, height = 70, bg = "light blue")
         self.SearchFrameLabel = Label(self.SearchFrame, font=("나눔 고딕", 25, "bold"), text="배우 상세 정보", bg = "light blue")
-        self.SearchEntry = Entry(self.SearchFrame, width = 31, font=("HYHeadLine", 15, "bold"), bd = 6, relief = "ridge")
-        self.SearchBtn = Button(self.SearchFrame, text ="검색", font=("나눔 고딕", 14, "bold"), width = 6, bd = 3, command = self.Search)
+        self.SearchEntry = Entry(self.SearchFrame, width = 31, font=("HYHeadLine", 15, "bold"), bd = 1 , relief = "solid", bg = "light blue")
+        self.searchImage = PhotoImage(file='image/Button/SearchHereIcon3.png')
+        self.SearchBtn = Button(self.SearchFrame, image = self.searchImage, command=self.Search,bg= "light blue", bd = 0)
+        #self.SearchBtn = Button(self.SearchFrame, text ="검색", font=("나눔 고딕", 14, "bold"), width = 6, bd = 3, command = self.Search)
+
+        self.bookmarkImage = PhotoImage(file='image/Button/BookmarkIcon.png')
+
+        self.Actor = []             # 이름, 프로필정보, 출연작품
+        self.BookmarkBtn = Button(self.SearchFrame, image = self.bookmarkImage, command = lambda  x = self.Actor : self.Bookmark(self.Actor), bg= "light blue", bd = 2)
 
         # 즐겨 찾기 버튼을 눌러 저장한 배우 목록들
         self.BookmarkList = []
         # 북마크 창이 켜져있는지 체크
-        self.BookmarkOn = False
         self.ListPage = 1
 
 
@@ -52,7 +59,8 @@ class ActorList():
         if ActorName == "":
             return
 
-        self.BookmarkOn = False
+        self.Actor.clear()
+        self.Actor.append(ActorName)
         self.NameLabel.configure(text = ActorName)
 
         url = "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=" + ActorName
@@ -113,6 +121,9 @@ class ActorList():
             self.ActorInfo[i].place(x = 175 , y = 30 * (i - dtcnt) + 45)
             self.LastInfoY = 30 * (i - dtcnt) + 45
 
+        for i in range(len(detail)):
+            info = detail[i] + " " + detailInfo[i]
+            self.Actor.append(info)
 
         # 출연한 영화정보
         for txt in self.ActorMovie:
@@ -145,6 +156,7 @@ class ActorList():
             for i in range(3):
                 self.ActorMovieImgLabel[i].place(x = 180 + (100 * i), y = self.LastInfoY + 50)
                 self.ActorMovie[i][1].place(x = 180 + (100 * i), y = self.LastInfoY + 135)
+                self.Actor.append(self.ActorMovie[i][0])
         else:
             self.ActorMovieLabel.configure(text="")
 
@@ -184,14 +196,29 @@ class ActorList():
     def NewsLink(self, link):
         OpenWebBrowser(link)
 
-    def Bookmark(self):
-        pass
+    def Bookmark(self, actor):
+        if len(actor) == 0:
+            return
 
-    def AddBookmark(self):
-        pass
+        index = self.FindIndexToBookmarkList(actor[0])  # -1이면  없는거임
 
-    def SubBookmark(self):
-        pass
+        if not index == -1:
+            self.BookmarkList.pop(index)
+
+        else:
+            self.BookmarkList.append(copy.deepcopy(actor))
+
+        #print(self.BookmarkList)
+        #print(len(self.BookmarkList))
+
+
+    def FindIndexToBookmarkList(self, name):
+        cnt = 0
+        for i in self.BookmarkList:
+            if i[0] == name:
+                return cnt
+            cnt+= 1
+        return -1
 
     def Render(self):
         self.SearchFrame.pack(anchor = "nw", expand=True)
@@ -199,22 +226,19 @@ class ActorList():
 
         self.SearchFrameLabel.place(x = 10, y = 10)
         self.SearchEntry.place(x = 300, y = 20)
-        self.SearchBtn.place(x = 670, y = 20)
+        self.SearchBtn.place(x = 643, y = 18)
+        self.BookmarkBtn.place(x = 800, y = 17)
 
         self.ActorLabel.place(x = 0, y = 0)
         self.NaverBtn.place(x = 28, y = 160)
         self.NameLabel.place(x=125, y=0)
         self.NewsLabel.place(x = self.width/ 2 , y = 0)
 
-        #self.BookmarkBnt.place(x = 355, y = 100)
-        #self.AddBookmarkBnt.place(x = 355, y = 130)
-        #self.SubBookmarkBnt.place(x = 355, y = 160)
-
-
     def GetFrame(self):
         return self.Background
 
-
+    def GetActorBookmark(self):
+        return self.BookmarkList
 
 if __name__ == '__main__': # ReadData.py를 실행시킬때만 실행되는 내용
     actor = urllib.parse.quote("영화배우정유미")
