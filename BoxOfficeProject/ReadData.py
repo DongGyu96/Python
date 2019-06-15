@@ -291,8 +291,5 @@ if __name__ == '__main__': # ReadData.py를 실행시킬때만 실행되는 내�
     print(Data)
 
     print(LoadNaverAPIToTest("CGV 강남"))
-
-    path = "C:\Python37\Lib\site-packages\selenium\webdriver"
-    driver = webdriver.Chrome(path)
 else:
     pass

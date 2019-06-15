@@ -26,6 +26,7 @@ class SearchTheater():
                     self.TheaterList.append(Theater(data[THEATERname].value,
                                                     data[THEATERstartdate].value,
                                                     data[THEATERprevaddress].value,
+                                                    address,
                                                     data[THEATERcall].value,
                                                     data[THEATERtype].value,
                                                     data[THEATERx].value))
@@ -127,10 +128,10 @@ class SearchTheater():
     def SelectTheater(self, event):
         name = self.searchTheater.get(self.searchTheater.curselection(), self.searchTheater.curselection())
         name = name[0]
-        MyTheater = Theater(None, None, None, None, None, None)
+        MyTheater = Theater(None, None, None, None, None, None, None)
         for theater in self.TheaterList:
             if theater.name == name:
-                MyTheater = Theater(theater.name, theater.date, theater.address, theater.tel, theater.type, theater.code)
+                MyTheater = Theater(theater.name, theater.date, theater.address, theater.address1, theater.tel, theater.type, theater.code)
                 break
         self.TheaterNameLabel.configure(text=MyTheater.name)
         self.TheaterAddressLabel.configure(text = MyTheater.address)
@@ -166,6 +167,39 @@ class SearchTheater():
 
     def GetFrame(self):
         return self.TheaterFrame
+
+    def GetTheater(self, list):
+        address = list[1:]
+        mytheater = []
+        for theater in self.TheaterList:
+            find = False
+            for addr in address:
+                if addr in theater.address:
+                    find = True
+                else:
+                    find = False
+
+            if find == False:
+                for addr in address:
+                    if addr in theater.address1:
+                        find = True
+                    else:
+                        find = False
+            if find == True:
+                mytheater.append(Theater(theater.name, theater.date, theater.address, theater.address1, theater.tel, theater.type, theater.code))
+
+        info = []
+        Data = []
+        for theater in mytheater:
+            location = LoadGoogleAPIGeocoding(theater.address)
+            info.append(theater.name)
+            info.append(theater.address1)
+            info.append(theater.tel)
+            info.append(location[0])
+            info.append(location[1])
+            Data.append(info)
+
+        return Data
 
 
 

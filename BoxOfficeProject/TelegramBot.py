@@ -1,7 +1,6 @@
 #-*- coding: utf-8 -*-
 import telepot
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
+from io import BytesIO
 import time
 import copy
 
@@ -49,6 +48,42 @@ class TeleBot:
             else:
                 for data in Data:
                     self.SendMessage(data)
+        elif list[0] == "영화":
+            Data = self.Program.GetMovieInfo(list)
+            if Data == None:
+                self.SendMessage('잘못된 명령어입니다. 다시 확인해주세요')
+                self.Help()
+            else:
+                for data in Data:
+                    self.SendMessage(data)
+        elif list[0] == "배우":
+            Data = self.Program.GetActorInfo(list)
+            if Data == None:
+                self.SendMessage('잘못된 명령어입니다. 다시 확인해주세요')
+                self.Help()
+            else:
+                for data in Data:
+                    self.SendMessage(data)
+        elif list[0] == "영화관":
+            Data = self.Program.GetTheater(list)
+            if Data == None:
+                self.SendMessage('잘못된 명령어입니다. 다시 확인해주세요')
+                self.Help()
+            else:
+                i = 0
+                for data in Data:
+                    text = "영화관 : " + data[0 + i] + "\n"
+                    text =  text + "주소 : " + data[1 + i] + "\n"
+                    try:
+                        text = text + "전화번호 : " + data[2 + i]
+                    except:
+                        pass
+                    self.SendMessage(text)
+                    self.bot.sendLocation(self.chatID, data[3 + i], data[4 + i])
+                    i += 5
+        else:
+            self.SendMessage('잘못된 명령어입니다.')
+            self.Help()
 
     def Help(self):
         text = "======= 명령어 ======= \n"

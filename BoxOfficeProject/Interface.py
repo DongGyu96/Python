@@ -58,3 +58,12 @@ class Interface:
 
     def GetRanking(self, list):
         return self.Ranking.GetRanking(list)
+
+    def GetMovieInfo(self, list):
+        return self.MovieList.GetMovieInfo(list)
+
+    def GetActorInfo(self, list):
+        return self.ActorList.GetActorInfo(list)
+
+    def GetTheater(self, list):
+        return self.TheaterList.GetTheater(list)

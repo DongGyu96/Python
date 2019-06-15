@@ -2,7 +2,7 @@ STATE = 0
 CITY = 1
 
 class Theater:
-    def __init__(self, name, date, address, tel, type, code):
+    def __init__(self, name, date, address, address1, tel, type, code):
         if name != None:
             name = name.replace("제1관", "")
             name = name.replace("제2관", "")
@@ -32,6 +32,7 @@ class Theater:
         self.name = name
         self.date = date
         self.address = address
+        self.address1 = address1
         try:
             self.addresslist = self.address.split()
         except:

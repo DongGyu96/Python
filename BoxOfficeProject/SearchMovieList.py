@@ -297,3 +297,46 @@ class MovieList():
 
     def GetFrame(self):
         return self.SearchFrame
+
+    def GetMovieInfo(self, list):
+        name = list[1]
+        MovieInfo = []
+        Data = LoadXMLFromFileMovieList(1, name)
+        for data in Data.find_all("movie"):
+            try:
+                code = data.find("moviecd").string
+                info = LoadXMLFromFileMovieInfo(code)
+                text = "영화 이름 : " + info.find("movienm").string + "\n"
+                try:
+                    text = text + "영문 이름 : " + info.find("movienmen").string + "\n"
+                except:
+                    pass
+                text = text + "상영 시간 : " + info.find("showtm").string + "\n"
+                text = text + "개봉일 : " + info.find("opendt").string + "\n"
+                text = text + "장르 : " + info.find("genrenm").string + "\n"
+                text = text + "==== 감독 ====\n"
+                for director in info.find_all("director"):
+                    text = text + director.find("peoplenm").string + "\n"
+                num = 0
+                text = text + "==== 배우 ====\n"
+                for actor in info.find_all("actor"):
+                    text = text + actor.find("peoplenm").string
+                    try:
+                        text = text + " (" + actor.find("cast").string + ")\n"
+                    except:
+                        text = text + "\n"
+                    num += 1
+                    if num > 6:
+                        break
+                text = text + "=============\n"
+                try:
+                    text = text + "심의 등급 : " + info.find("watchgradenm").string + "\n"
+                except:
+                    text = text + "심의 등급 : 미정\n"
+                text = text + "제작 상태 : " + info.find("prdtstatnm").string + "\n"
+                text = text + "제작 국가 : " + info.find("nationnm").string + "\n"
+                text = text + "분류 : " + info.find("typenm").string
+                MovieInfo.append(text)
+            except:
+                pass
+        return MovieInfo
