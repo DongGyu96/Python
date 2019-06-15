@@ -5,7 +5,7 @@ from RankingGraph import *
 
 class Ranking():
     def __init__(self, window, width, height):
-        self.boxofficeimage = PhotoImage(file="image/Ranking.png")
+        self.boxofficeimage = PhotoImage(file="image/Ranking3.png")
         self.nextbuttonImage = PhotoImage(file='image/Button/NextPageIcon1.png')
         self.prevbuttonImage = PhotoImage(file='image/Button/PrevPageIcon1.png')
         self.searchImage = PhotoImage(file = 'image/SearchIcon.png')
@@ -24,8 +24,8 @@ class Ranking():
                                         bd=4, relief="ridge", background = framecolor))
             self.rankcanvas.append(Canvas(self.RankingFrame, width=250, height=300, bd=2, relief="solid"))
             self.rankcanvas[i].create_rectangle(0, 0, 255, 305, fill="light blue")
-        self.frametitle = Frame(self.RankingFrame, width=400, height=80, background = framecolor)
-        self.boxofficelabel = Label(self.frametitle, image=self.boxofficeimage, bg = framecolor)
+        self.frametitle = Frame(self.RankingFrame, width=400, height=100, background = framecolor)
+        self.boxofficelabel = Label(self.frametitle, image=self.boxofficeimage, bg = "light blue3")
 
         self.frameranking1 = Frame(self.RankingFrame, width=480, height=110, background = framecolor)
 
@@ -162,9 +162,9 @@ class Ranking():
         for i in range(3):
             self.rankframe[i].place(x = (i * 300) + 15, y = 145)
             self.rankcanvas[i].place(x= (i * 300) + 20, y = 150)
-        self.frametitle.place(x = 10, y = 10)
+        self.frametitle.place(x = 10, y = 5)
         self.frameranking1.place(x = 420, y = 0)
-        self.ranktypebox.place(x = 0, y = 27)
+        self.ranktypebox.place(x = 0, y = 30)
         self.yearbox.place(x = 70, y = 27)
         self.monthbox.place(x = 150, y = 27)
         self.daybox.place(x = 230, y = 27)
@@ -173,7 +173,7 @@ class Ranking():
         self.monthlabel.place(x = 180, y = -3)
         self.daylabel.place(x = 260, y = -3)
         self.setrankbutton.place(x = 320, y = 10)
-        self.boxofficelabel.place(x= -20, y = 0)
+        self.boxofficelabel.place(x= 0, y = 0)
         self.datelabel.place(x = 20, y = 100)
         self.nextrankingbutton.place(x = 260, y = 60)
         self.prevrankingbutton.place(x=70, y=60)

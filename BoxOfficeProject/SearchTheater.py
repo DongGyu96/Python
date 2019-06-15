@@ -159,11 +159,11 @@ class SearchTheater():
         self.searchCity.pack()
         self.searchScrollbar3.pack(side=RIGHT, fill="y")
         self.searchTheater.pack()
-        self.Map.place(x=-5, y=60)
+        self.Map.place(x=-5, y=65)
+        self.TitleLabel.place(x=10, y=-5)
         self.TheaterNameLabel.place(x = 0, y = 370)
         self.TheaterAddressLabel.place(x = 0, y = 400)
         self.TheaterLinkLabel.place(x = 0, y = 430)
-        self.TitleLabel.place(x=10, y = -10)
 
     def GetFrame(self):
         return self.TheaterFrame

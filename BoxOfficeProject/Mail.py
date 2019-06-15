@@ -12,11 +12,12 @@ class Gmail:
         self.width = width
         self.height = height
         self.interface = interface
-
+        self.bookmark = PhotoImage(file = "image/BookmarkLabel.png")
+        self.mailimage = PhotoImage(file = "image/EmailLabel.png")
         self.Background = Frame(window, bd=2, relief="solid", background="light blue")
 
         self.BookMarkFrame = Frame(self.Background, width = self.width / 2, height = self.height, bg = "light blue")
-        self.BookMarkLabel = Label(self.BookMarkFrame, text = "북마크",font=("나눔 고딕", 25, "bold"), bg = "light blue" )
+        self.BookMarkLabel = Label(self.BookMarkFrame, image = self.bookmark, bg = "light blue" )
         self.BookMarkListFrame = Frame(self.BookMarkFrame,width = self.width / 2)
         self.BookMarkScroll = Scrollbar(self.BookMarkListFrame)
         self.BookMarkInfoList = []
@@ -27,7 +28,7 @@ class Gmail:
         #self.AddBookMarkList()
 
         self.MailFrame = Frame(self.Background, width = self.width / 2, height = 140, bg = "light blue")
-        self.MailLabel = Label(self.MailFrame, text = "Gmail 보내기",font=("나눔 고딕", 25, "bold"), bg = "light blue" )
+        self.MailLabel = Label(self.MailFrame, image = self.mailimage, bg = "light blue" )
         self.RecvIDLabel = Label(self.MailFrame, text ="Mail 주소 : ", font=("HYHeadLine", 15, "bold"), bg ="light blue")
         self.RecvIDEntry = Entry(self.MailFrame, width = 28, font=("HYHeadLine", 15, "bold"), bg ="light blue")
         self.RecvIDEntry.insert(END, "hayoon9611@gmail.com")
@@ -50,7 +51,7 @@ class Gmail:
         MovieBookMark = self.interface.MovieList.GetBookmark()
         #print(MovieBookMark)
         for d in MovieBookMark:
-            print(d)
+            #print(d)
             self.BookMarkInfoList.append(d)
             self.BookMarkList.insert(END, "영화 - " + d[0].replace("영화 이름 ", ""))
         ActorBookMark = self.interface.ActorList.GetActorBookmark()

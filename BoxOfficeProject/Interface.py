@@ -41,7 +41,6 @@ class Interface:
         self.TeleBot = TeleBot(self)
         self.TeleBot.Message_Loop()
 
-
     def SetPhotoImage(self):
         # label, button에도 사용 가능
         self.RankingIcon = PhotoImage(file="image/RankingIcon4.png")

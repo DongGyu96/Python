@@ -19,6 +19,9 @@ class MovieList():
         self.previmage = PhotoImage(file='image/Button/PrevPageIcon2.png')
         self.infoimage = PhotoImage(file='image/Button/MoreInfoIcon2.png')
         self.searchimage = PhotoImage(file='image/Button/SearchHereIcon2.png')
+        self.addmarkimage = PhotoImage(file = 'image/Button/AddMarkIcon.png')
+        self.delmarkimage = PhotoImage(file='image/Button/DelMarkIcon.png')
+        self.showmarkimage = PhotoImage(file='image/Button/ShowMarkIcon.png')
         temp = 'light blue'
         #bd = 두깨 크기
         #relief = 외곽선 설정
@@ -55,9 +58,9 @@ class MovieList():
 
         self.resetbutton = Button(self.SearchFrame, image = self.clearimage, bd = 3, command = self.Reset, bg = "SteelBlue4")
 
-        self.insertmarkbutton = Button(self.SearchFrame, font=("휴면엑스포", 16, "bold"), text = "북마크 추가", bd=3, command=self.Insert, bg="SteelBlue4")
-        self.deletemarkbutton = Button(self.SearchFrame, font=("휴면엑스포", 16, "bold"), text = "북마크 삭제", bd=3, command=self.Delete, bg="SteelBlue4")
-        self.showmarkbutton = Button(self.SearchFrame,font=("휴면엑스포", 16, "bold"), text = "북마크 보기", bd=3, command=self.Show, bg="SteelBlue4")
+        self.insertmarkbutton = Button(self.SearchFrame, image = self.addmarkimage, bd=3, command=self.Insert, bg="SteelBlue4")
+        self.deletemarkbutton = Button(self.SearchFrame, image = self.delmarkimage, bd=3, command=self.Delete, bg="SteelBlue4")
+        self.showmarkbutton = Button(self.SearchFrame, image = self.showmarkimage, bd=3, command=self.Show, bg="SteelBlue4")
 
         self.setpage = Entry(self.SearchFrame, font=("HYHeadLine", 15, "bold"), width=7, bg = temp)
         self.setpage.insert(0, str(self.movielistpage))
@@ -84,13 +87,16 @@ class MovieList():
         # 리스트박스에 몇개를 집어넣었는지 알고 있어야 함
 
     def Insert(self):
-        name = self.movielistbox.get(self.movielistbox.curselection(),self.movielistbox.curselection())
-        for data in self.MovieListData.find_all("movie"):
-            if data.movienm.string == name[0]:
-                code = data.moviecd.string
-                Data = LoadXMLFromFileMovieInfo(data.moviecd.string)
-        self.BookmarkMovie.append(MovieInfo(code, name[0], Data))
-        self.BookmarkNum += 1
+        try:
+            name = self.movielistbox.get(self.movielistbox.curselection(),self.movielistbox.curselection())
+            for data in self.MovieListData.find_all("movie"):
+                if data.movienm.string == name[0]:
+                    code = data.moviecd.string
+                    Data = LoadXMLFromFileMovieInfo(data.moviecd.string)
+            self.BookmarkMovie.append(MovieInfo(code, name[0], Data))
+            self.BookmarkNum += 1
+        except:
+            pass
 
     def Delete(self):
         if self.ShowBookmark == False:
@@ -339,7 +345,7 @@ class MovieList():
         self.movielistscrollbar.pack(side=RIGHT, fill="y")
         self.movielistbox.pack(anchor="s")
         self.movieinfocanvas.pack(side=RIGHT)
-        self.SearchFrameLabel.place(x=5, y=-5)
+        self.SearchFrameLabel.place(x=50, y=-5)
         self.searchmovie.place(x=0, y=62)
         self.searchmoviebutton.place(x=330, y=60)
         self.nextmoviebutton.place(x=330, y=110)
@@ -349,13 +355,15 @@ class MovieList():
 
         self.insertmarkbutton.place(x=330, y=270)
         self.deletemarkbutton.place(x=330, y=310)
-        self.showmarkbutton.place(x=330, y=360)
+        self.showmarkbutton.place(x=330, y=350)
 
         self.setpage.place(x=330, y= 430)
         self.pagelabel.place(x=330, y = 400)
 
     def Reset(self):
         self.movielistpage = 1
+        self.setpage.delete(0, len(self.setpage.get()))
+        self.setpage.insert(0, str(self.movielistpage))
         self.moviename = None
         self.searchmovie.delete(0, len(self.searchmovie.get()))
         self.ResetMovieList()
@@ -416,18 +424,18 @@ class MovieList():
                 movie.append("상영 시간 : " + data.data.find("showtm").string + "분")
                 text = ""
                 for gerne in data.data.find_all("genre"):
-                    text = text + ", " + gerne.find("genrenm").string
+                    text = text + " " +  gerne.find("genrenm").string
                 movie.append("장르 : " + text)
                 text = ""
 
                 for director in data.data.find_all("director"):
-                    text = text + ", " + director.find("peoplenm").string
+                    text = text + " " + director.find("peoplenm").string + " |"
                 movie.append("감독 : " + text)
                 text = ""
 
                 num = 0
                 for actor in data.data.find_all("actor"):
-                    text = text + ", " + actor.find("peoplenm").string
+                    text = text + " " + actor.find("peoplenm").string + " |"
                     num += 1
                     if num > 6:
                         break
@@ -440,5 +448,4 @@ class MovieList():
                 movie = []
             except:
                 movie = []
-
         return Bookmark

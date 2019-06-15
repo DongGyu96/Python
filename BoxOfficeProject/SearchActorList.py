@@ -15,11 +15,11 @@ class ActorList():
         self.ActorName = None
         self.width = width
         self.height = height
-
+        self.title = PhotoImage(file = "image/SearchActorLabel.png")
         self.Background = Frame(window, bd=2, relief="solid", background="light blue")
 
         self.SearchFrame = Frame(self.Background, width = self.width, height = 70, bg = "light blue")
-        self.SearchFrameLabel = Label(self.SearchFrame, font=("나눔 고딕", 25, "bold"), text="인물 상세 정보", bg = "light blue")
+        self.SearchFrameLabel = Label(self.SearchFrame, image = self.title, bg = "light blue")
         self.SearchEntry = Entry(self.SearchFrame, width = 31, font=("HYHeadLine", 15, "bold"), bd = 1 , relief = "solid", bg = "light blue")
         self.searchImage = PhotoImage(file='image/Button/SearchHereIcon3.png')
         self.SearchBtn = Button(self.SearchFrame, image = self.searchImage, command=self.Search,bg= "light blue", bd = 0)
@@ -278,7 +278,7 @@ class ActorList():
         self.SearchFrame.pack(anchor = "nw", expand=True)
         self.InfoFrame.pack(fill="both")
 
-        self.SearchFrameLabel.place(x = 10, y = 10)
+        self.SearchFrameLabel.place(x = -10, y = -5)
         self.SearchEntry.place(x = 300, y = 20)
         self.SearchBtn.place(x = 643, y = 18)
         self.BookmarkBtn.place(x = 800, y = 17)

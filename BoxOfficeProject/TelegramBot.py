@@ -9,6 +9,7 @@ import copy
 
 # chat id
 # 805144083
+# 646150383
 
 #http://developwoong.blogspot.com/2018/11/cgv.html
 # + 구글 검색 api
@@ -33,11 +34,11 @@ class TeleBot:
 
     def handle(self, msg):
         content_type, chat_type, chat_id = telepot.glance(msg)
+        self.chatID = msg['chat']['id']
         if content_type != 'text':
             self.SendMessage('잘못된 명령어입니다.')
             self.Help()
             return
-
         text = msg['text']
         list = text.split(' ')
         if list[0] == "일간" or list[0] == "주간":
