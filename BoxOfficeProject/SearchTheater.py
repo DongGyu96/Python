@@ -195,6 +195,8 @@ class SearchTheater():
             info.append(theater.name)
             info.append(theater.address1)
             info.append(theater.tel)
+            name = urllib.parse.quote(theater.name)
+            info.append("https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=" + name)
             info.append(location[0])
             info.append(location[1])
             Data.append(info)

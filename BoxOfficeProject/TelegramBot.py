@@ -19,8 +19,8 @@ class TeleBot:
         self.chatID = '805144083'
         self.bot = telepot.Bot(self.tokken)
 
-        self.SendMessage("영화 박스오피스 텔레그램 봇이 실행되었습니다.")
-        self.Help()
+        #self.SendMessage("영화 박스오피스 텔레그램 봇이 실행되었습니다.")
+        #self.Help()
         self.Program = copy.copy(interface)
     def __del__(self):
         self.SendMessage("영화 박스오피스 텔레그램 봇이 종료되었습니다.")
@@ -75,12 +75,13 @@ class TeleBot:
                     text = "영화관 : " + data[0 + i] + "\n"
                     text =  text + "주소 : " + data[1 + i] + "\n"
                     try:
-                        text = text + "전화번호 : " + data[2 + i]
+                        text = text + "전화번호 : " + data[2 + i] + "\n"
                     except:
                         pass
+                    text = text + "링크 : " + data[3 + i]
                     self.SendMessage(text)
-                    self.bot.sendLocation(self.chatID, data[3 + i], data[4 + i])
-                    i += 5
+                    self.bot.sendLocation(self.chatID, data[4 + i], data[5 + i])
+                    i += 6
         else:
             self.SendMessage('잘못된 명령어입니다.')
             self.Help()

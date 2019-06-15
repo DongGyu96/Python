@@ -1,11 +1,15 @@
 from tkinter import *
 from tkinter.font import *
 from ReadData import *
+from MovieInfo import *
 
 class MovieList():
     def __init__(self, window, width, height):
         self.moviename = None
         self.movielistpage = 1  # 1부터 페이지를 넘길거기 때문
+        self.BookmarkMovie = []
+        self.BookmarkNum = 0
+        self.ShowBookmark = False
         self.width = width
         self.height = height
         self.labelimage = PhotoImage(file = 'image/SearchMovieLabel.png')
@@ -50,6 +54,11 @@ class MovieList():
         self.infobutton = Button(self.SearchFrame, image = self.infoimage, bd = 3, command = self.Info, bg = "SteelBlue4")
 
         self.resetbutton = Button(self.SearchFrame, image = self.clearimage, bd = 3, command = self.Reset, bg = "SteelBlue4")
+
+        self.insertmarkbutton = Button(self.SearchFrame, font=("휴면엑스포", 16, "bold"), text = "북마크 추가", bd=3, command=self.Insert, bg="SteelBlue4")
+        self.deletemarkbutton = Button(self.SearchFrame, font=("휴면엑스포", 16, "bold"), text = "북마크 삭제", bd=3, command=self.Delete, bg="SteelBlue4")
+        self.showmarkbutton = Button(self.SearchFrame,font=("휴면엑스포", 16, "bold"), text = "북마크 보기", bd=3, command=self.Show, bg="SteelBlue4")
+
         self.setpage = Entry(self.SearchFrame, font=("HYHeadLine", 15, "bold"), width=7, bg = temp)
         self.setpage.insert(0, str(self.movielistpage))
         self.pagelabel = Label(self.SearchFrame, font =("HYHeadLine", 15, "bold"), text = "[Page]", bg = temp)
@@ -74,7 +83,43 @@ class MovieList():
         self.movielistsize = i # 새로 검색이나 다음페이지나 이전페이지로 갈경우 리스트박스를 지우고 다시 추가해야되기 때문에
         # 리스트박스에 몇개를 집어넣었는지 알고 있어야 함
 
+    def Insert(self):
+        name = self.movielistbox.get(self.movielistbox.curselection(),self.movielistbox.curselection())
+        for data in self.MovieListData.find_all("movie"):
+            if data.movienm.string == name[0]:
+                code = data.moviecd.string
+                Data = LoadXMLFromFileMovieInfo(data.moviecd.string)
+        self.BookmarkMovie.append(MovieInfo(code, name[0], Data))
+        self.BookmarkNum += 1
+
+    def Delete(self):
+        if self.ShowBookmark == False:
+            return
+        name = self.movielistbox.get(self.movielistbox.curselection(), self.movielistbox.curselection())
+        i = 0
+        for data in self.BookmarkMovie:
+            if name[0] == data.name:
+                del self.BookmarkMovie[i]
+                self.Show()
+                self.BookmarkNum -= 1
+                break
+            i += 1
+
+    def Show(self):
+        self.setpage.delete(0, len(self.setpage.get()))
+        self.setpage.insert(0, str(1))
+        if self.ShowBookmark == True:
+            self.movielistbox.delete(0, self.BookmarkNum)
+        else:
+            self.movielistbox.delete(0, self.movielistsize)
+
+        self.ShowBookmark = True
+        i = 0
+        for data in self.BookmarkMovie:
+            self.movielistbox.insert(i, data.name)
+
     def Search(self):
+        self.ShowBookmark = False
         self.moviename = self.searchmovie.get() # 찾으려는 이름을 Entry에서 얻어옴
         self.movielistpage = 1
         if self.moviename != "":
@@ -90,11 +135,18 @@ class MovieList():
             # get(start, end) 면 스타트부터 앤드까지의 항목들을 튜플로 받아옴
             # get(1, 1) 이면 리스트박스 2번째의 영화이름이 들어간 (영화이름,) 이 반환되서
             # self.searchname[0] 으로 뽑아내서 쓰면 됨
-            self.searchname = self.movielistbox.get(self.movielistbox.curselection(),self.movielistbox.curselection())
-            for data in self.MovieListData.find_all("movie"):
-                if data.movienm.string == self.searchname[0]:
-                    self.movieInfoData = LoadXMLFromFileMovieInfo(data.moviecd.string)
-                    break
+            if self.ShowBookmark == True:
+                self.searchname = self.movielistbox.get(self.movielistbox.curselection(),self.movielistbox.curselection())
+                for data in self.BookmarkMovie:
+                    if data.name == self.searchname[0]:
+                        self.movieInfoData = data.data
+                        break
+            else:
+                self.searchname = self.movielistbox.get(self.movielistbox.curselection(),self.movielistbox.curselection())
+                for data in self.MovieListData.find_all("movie"):
+                    if data.movienm.string == self.searchname[0]:
+                        self.movieInfoData = LoadXMLFromFileMovieInfo(data.moviecd.string)
+                        break
         except:
             self.searchname = None
         self.RenderMovieInfo()
@@ -229,12 +281,16 @@ class MovieList():
         #http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.xml?key=e4ef9cc26c8da2fbd710c5899e835cd7&movieCd=20191590
 
     def NextMovie(self):
+        if self.ShowBookmark == True:
+            return
         # 페이지를 증가시키고 리스트 박스 리셋
         self.movielistpage += 1
         self.setpage.delete(0, len(self.setpage.get()))
         self.setpage.insert(0, str(self.movielistpage))
         self.ResetMovieList()
     def PrevMovie(self):
+        if self.ShowBookmark == True:
+            return
         if self.movielistpage > 1:
             self.movielistpage -= 1
             self.setpage.delete(0, len(self.setpage.get()))
@@ -255,7 +311,11 @@ class MovieList():
         self.MovieListData = LoadXMLFromFileMovieList(self.movielistpage, self.moviename)
         # 검색하려는 페이지와 이름을 넣어서 반환받음
 
-        self.movielistbox.delete(0, self.movielistsize)
+        if self.ShowBookmark == True:
+            self.movielistbox.delete(0, self.BookmarkNum)
+        else:
+            self.movielistbox.delete(0, self.movielistsize)
+        self.ShowBookmark = False
         # 리스트박스 원소갯수만큼 지움
         i = 0
         find = False
@@ -286,6 +346,11 @@ class MovieList():
         self.prevmoviebutton.place(x=330, y=150)
         self.infobutton.place(x=330, y= 190)
         self.resetbutton.place(x=330, y = 230)
+
+        self.insertmarkbutton.place(x=330, y=270)
+        self.deletemarkbutton.place(x=330, y=310)
+        self.showmarkbutton.place(x=330, y=360)
+
         self.setpage.place(x=330, y= 430)
         self.pagelabel.place(x=330, y = 400)
 
@@ -340,3 +405,6 @@ class MovieList():
             except:
                 pass
         return MovieInfo
+
+    def GetBookmark(self):
+        return self.BookmarkMovie
